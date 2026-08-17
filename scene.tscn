@@ -1,17 +1,16 @@
 [gd_scene format=3 uid="uid://d3tflhq8vgolo"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_lxpj2"]
+viewport_path = NodePath("2DViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x0ryr"]
+viewport_path = NodePath("3DViewport")
+
 [sub_resource type="BoxMesh" id="BoxMesh_lxpj2"]
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1031219095]
-transform = Transform3D(0.8089059, 0.48318726, -0.33496475, 0, 0.56972784, 0.82183343, 0.5879382, -0.6647859, 0.46085617, 0, 0, 0)
-
-[node name="TestMesh" type="MeshInstance3D" parent="." unique_id=1431079152]
-transform = Transform3D(-0.14747576, -0.42371413, 0.8937098, 0.6097728, 0.67248577, 0.41945207, -0.77873486, 0.606819, 0.15919401, 0, 0, 0)
-mesh = SubResource("BoxMesh_lxpj2")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=30997662]
+[node name="Letterbox" type="ColorRect" parent="." unique_id=30997662]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,38 +18,47 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1060646724]
-custom_minimum_size = Vector2(256, 192)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
+[node name="2D" type="TextureRect" parent="." unique_id=606091952]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = SubResource("ViewportTexture_lxpj2")
+stretch_mode = 5
 
-[node name="2DViewport" type="SubViewport" parent="SubViewportContainer" unique_id=36197022]
+[node name="3D" type="TextureRect" parent="." unique_id=432575779]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_x0ryr")
+stretch_mode = 5
+
+[node name="2DViewport" type="SubViewport" parent="." unique_id=36197022]
 handle_input_locally = false
-size = Vector2i(1152, 648)
-size_2d_override = Vector2i(256, 192)
-size_2d_override_stretch = true
+size = Vector2i(256, 192)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/2DViewport" unique_id=1490859813]
+[node name="Camera2D" type="Camera2D" parent="2DViewport" unique_id=1490859813]
 
-[node name="3DViewport" type="SubViewport" parent="SubViewportContainer" unique_id=387643051]
+[node name="3DViewport" type="SubViewport" parent="." unique_id=387643051]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1152, 648)
-size_2d_override = Vector2i(256, 192)
-size_2d_override_stretch = true
+size = Vector2i(256, 192)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/3DViewport" unique_id=1150856261]
+[node name="Camera3D" type="Camera3D" parent="3DViewport" unique_id=1150856261]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2684932)
 projection = 1
 size = 5.673
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1031219095]
+transform = Transform3D(0.8089059, 0.48318726, -0.33496475, 0, 0.56972784, 0.82183343, 0.5879382, -0.6647859, 0.46085617, 0, 0, 0)
+
+[node name="TestMesh" type="MeshInstance3D" parent="." unique_id=1431079152]
+transform = Transform3D(-0.14747576, -0.42371413, 0.8937098, 0.6097728, 0.67248577, 0.41945207, -0.77873486, 0.606819, 0.15919401, 0, 0, 0)
+mesh = SubResource("BoxMesh_lxpj2")
