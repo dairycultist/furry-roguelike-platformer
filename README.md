@@ -13,3 +13,4 @@
   - optional since I have no friends
 - unique guns and trinkets that you collect throughout your run
 - Godot
+- visual style is basically just NSMB: pixel perfect, pixel art terrain, 3D model entities
