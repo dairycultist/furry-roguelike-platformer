@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const MAX_CAM_OFF = Vector2(24, 32);
+const CAMERA_DEADZONE_RADIUS = Vector2(24, 32);
 
 const SPEED = 150.0;
 const JUMP_VELOCITY = -500.0;
@@ -11,10 +11,12 @@ func _process(delta: float) -> void:
 	$Mesh.rotation.y += delta;
 	
 	# camera follows player (replicated by moving 2DAnchor as there's no camera)
-	# where the player may be offset from the camera's center by up to a fixed amount
-	var player_camera_off : Vector2 = (-get_parent().global_position + Vector2(256 / 2, 192 / 2)) - position;
+	# with a deadzone of CAMERA_DEADZONE_RADIUS
+	var player_camera_off : Vector2 = Vector2(256 / 2, 192 / 2) - (get_parent().global_position + position);
 	
-	get_parent().global_position = Vector2(256 / 2, 192 / 2) - (player_camera_off.clamp(-MAX_CAM_OFF, MAX_CAM_OFF) + position);
+	player_camera_off = player_camera_off.clamp(-CAMERA_DEADZONE_RADIUS, CAMERA_DEADZONE_RADIUS);
+	
+	get_parent().global_position = Vector2(256 / 2, 192 / 2) - (player_camera_off + position);
 	
 	# player mesh follows player
 	$Mesh.global_position = Vector3(global_position.x / 16, -global_position.y / 16, 0);
