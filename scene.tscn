@@ -3,14 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://pm06j71lvbcl" path="res://test_sprite.png" id="2_3253y"]
 [ext_resource type="Script" uid="uid://btguypw88w8b6" path="res://player.gd" id="2_nxogm"]
 [ext_resource type="MeshLibrary" uid="uid://case15hofb14m" path="res://terrain_library.tres" id="3_3253y"]
+[ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lxpj2"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
-size = Vector2(20, 20)
+size = Vector2(100, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imqp1"]
-albedo_color = Color(0.60689896, 0.47533524, 0.37674624, 1)
+albedo_texture = ExtResource("4_u3cyc")
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_world_triplanar = true
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
@@ -44,6 +48,6 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("2_3253y")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=421907200]
+[node name="GroundMesh" type="MeshInstance3D" parent="." unique_id=421907200]
 mesh = SubResource("PlaneMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_imqp1")
