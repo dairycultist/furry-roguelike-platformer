@@ -7,5 +7,6 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("player_left", "player_right", "player_up", "player_down");
 	
 	velocity = global_basis * Vector3(direction.x, 0, direction.y) * 5.0;
+	velocity.y = -1.0;
 
 	move_and_slide();
