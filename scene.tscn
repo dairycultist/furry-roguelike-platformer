@@ -81,7 +81,7 @@ size = 16.0
 shape = SubResource("CapsuleShape3D_lxpj2")
 
 [node name="Sprite" type="Sprite3D" parent="Viewport/Player" unique_id=1524805806]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4496969, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.029491425, 0)
 pixel_size = 0.0625
 billboard = 1
 texture_filter = 0

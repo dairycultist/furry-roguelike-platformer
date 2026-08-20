@@ -1,8 +1,8 @@
 shader_type spatial;
 
-uniform sampler2D r_texture : source_color;
-uniform sampler2D g_texture : source_color;
-uniform sampler2D b_texture : source_color;
+uniform sampler2D r_texture : source_color, filter_nearest;
+uniform sampler2D g_texture : source_color, filter_nearest;
+uniform sampler2D b_texture : source_color, filter_nearest;
 
 varying vec4 vcolor;
 varying vec3 pos;
