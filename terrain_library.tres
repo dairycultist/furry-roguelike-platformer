@@ -1,6 +1,9 @@
 [gd_resource type="MeshLibrary" format=3 uid="uid://case15hofb14m"]
 
 [ext_resource type="ArrayMesh" uid="uid://bgg7avvbrroey" path="res://gravel.obj" id="1_imqp1"]
+[ext_resource type="ArrayMesh" uid="uid://mfww5oww1q63" path="res://wall.obj" id="2_emhua"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_emhua"]
 
 [resource]
 item/0/name = ""
@@ -10,3 +13,10 @@ item/0/mesh_cast_shadow = 1
 item/0/shapes = []
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
+item/1/name = ""
+item/1/mesh = ExtResource("2_emhua")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/mesh_cast_shadow = 1
+item/1/shapes = [SubResource("BoxShape3D_emhua"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
