@@ -48,7 +48,9 @@ func is_cell_big(cell_type: String) -> bool:
 	
 	return [ "monument" ].has(cell_type);
 
-## Returns an array where [0]=Vector3i cell position, [1]=String cell type
+## Returns an array where [0]=Vector3i cell position, [1]=String cell type.
+## Collapses MergeGroups into a single type, and treats 3x3 cell types as a
+## single cell.
 func get_cell_data(pos: Vector3) -> Array:
 	
 	var posi := local_to_map(pos);
@@ -72,5 +74,25 @@ func get_cell_data(pos: Vector3) -> Array:
 	# find the String identifier that matches the target cell index
 	return [posi, _string_id_of_cell_index(target)];
 
+## Returns true only if the position is empty, and, if the type is a 3x3 cell,
+## the surrounding positions are empty too. If type="", will always return true
+## unless the position contains an "occupied" cell.
+func can_set_cell(pos: Vector3i, type: String) -> bool:
+	
+	var posi := local_to_map(pos);
+	
+	if (type == ""):
+		return _string_id_of_cell_index(get_cell_item(posi)) != "occupied";
+	
+	if (is_cell_big(type)):
+		for dx in range(-1, 2):
+			for dz in range(-1, 2):
+				if get_cell_item(posi + Vector3i(dx, 0, dz)) >= 0:
+					return false;
+		return true;
+	else:
+		return get_cell_item(posi) < 0;
+
+## 
 func set_cell(pos: Vector3i, _type: String):
 	set_cell_item(pos, 1);
