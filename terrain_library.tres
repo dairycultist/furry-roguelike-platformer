@@ -11,14 +11,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8uyc"]
 
 [resource]
-item/0/name = ""
+item/0/name = "Gravel"
 item/0/mesh = ExtResource("1_imqp1")
 item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/0/mesh_cast_shadow = 1
+item/0/mesh_cast_shadow = 0
 item/0/shapes = []
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
-item/1/name = ""
+item/1/name = "Wall"
 item/1/mesh = ExtResource("2_emhua")
 item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/mesh_cast_shadow = 1
@@ -31,7 +31,7 @@ item/2/mesh_cast_shadow = 1
 item/2/shapes = [SubResource("BoxShape3D_2k8am"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/navigation_layers = 1
-item/3/name = ""
+item/3/name = "Monument"
 item/3/mesh = ExtResource("3_2k8am")
 item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/mesh_cast_shadow = 1

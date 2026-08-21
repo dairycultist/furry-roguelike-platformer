@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var gridmap : GridMap;
+@export var grid : BetterGridMap;
 
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;
@@ -41,22 +41,20 @@ func _process(delta: float) -> void:
 	$Corner3.global_position -= velocity * delta;
 	
 	# selection
-	var selected_pos := gridmap.local_to_map(global_position);
-	var selected_type := gridmap.get_cell_item(selected_pos);
+	var selected_pos := grid.local_to_map(global_position);
+	var selected_type := grid.get_cell_item(selected_pos);
 	
 	# occupied cells indicate there's a larger than 1x1 cell nearby -- center on that
 	if (selected_type == 2):
 		for dx in range(-1, 2):
 			for dz in range(-1, 2):
 				
-				var type := gridmap.get_cell_item(selected_pos + Vector3i(dx, 0, dz));
+				var type := grid.get_cell_item(selected_pos + Vector3i(dx, 0, dz));
 				
 				if (LARGE_CELLS.has(type)):
 					
 					selected_pos = selected_pos + Vector3i(dx, 0, dz);
 					selected_type = type;
-	
-	print(selected_type);
 	
 	if (selected_type == 3):
 		$Corner0.global_position = lerp($Corner0.global_position, Vector3(selected_pos) + Vector3(-1.0, 0.0, -1.0), 10.0 * delta);
@@ -68,3 +66,6 @@ func _process(delta: float) -> void:
 		$Corner1.global_position = lerp($Corner1.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 0.0), 10.0 * delta);
 		$Corner2.global_position = lerp($Corner2.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 1.0), 10.0 * delta);
 		$Corner3.global_position = lerp($Corner3.global_position, Vector3(selected_pos) + Vector3(0.0, 0.0, 1.0), 10.0 * delta);
+	
+	if (Input.is_action_just_pressed("use_tool")):
+		grid.set_cell(selected_pos, "wall");
