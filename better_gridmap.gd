@@ -26,7 +26,7 @@ class MergeGroup:
 
 var CELL_TYPES : Dictionary = {
 	"": -1,
-	"wall": MergeGroup.new(1, 4, 6, 1, 5, 1),
+	"wall": MergeGroup.new(1, 4, 6, 1, 5, 7),
 	"occupied": 2,
 	"monument": 3,
 	"gravel": 0
@@ -115,8 +115,11 @@ func _update_merge_cell(pos: Vector3i, type: String):
 	if right:  count += 1;
 	
 	if count == 0:
+		
 		set_cell_item(pos, CELL_TYPES.get(type).solo);
+		
 	elif count == 1:
+		
 		if top:
 			set_cell_item(pos, CELL_TYPES.get(type).end, 16);
 		elif bottom:
@@ -125,7 +128,22 @@ func _update_merge_cell(pos: Vector3i, type: String):
 			set_cell_item(pos, CELL_TYPES.get(type).end, 10);
 		else:
 			set_cell_item(pos, CELL_TYPES.get(type).end, 0);
+			
+	elif count == 2:
+		
+		if top == bottom:
+			
+			if top:
+				set_cell_item(pos, CELL_TYPES.get(type).tube, 0);
+			else:
+				set_cell_item(pos, CELL_TYPES.get(type).tube, 16);
+			
+		else:
+			
+			pass;
+		
 	elif count == 3:
+		
 		if !top:
 			set_cell_item(pos, CELL_TYPES.get(type).side, 22);
 		elif !bottom:
@@ -134,7 +152,9 @@ func _update_merge_cell(pos: Vector3i, type: String):
 			set_cell_item(pos, CELL_TYPES.get(type).side, 0);
 		else:
 			set_cell_item(pos, CELL_TYPES.get(type).side, 10);
+			
 	else:
+		
 		set_cell_item(pos, CELL_TYPES.get(type).full);
 
 ## Sets a cell (without checking its contents; do that yourself with
