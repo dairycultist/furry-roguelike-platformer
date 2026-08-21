@@ -29,6 +29,21 @@ var CELL_TYPES : Dictionary = {
 	"gravel": 0
 };
 
+func _string_id_of_cell_index(index: int) -> String:
+	
+	for id in CELL_TYPES.keys():
+		
+		var to_compare = CELL_TYPES.get(id);
+		
+		if to_compare is MergeGroup:
+			if to_compare.has_index(index):
+				return id;
+		elif to_compare == index:
+			return id;
+	
+	# return empty on no match
+	return "";
+
 ## Returns an array where [0]=Vector3i cell position, [1]=String cell type
 func get_cell_data(pos: Vector3) -> Array:
 	
@@ -41,7 +56,7 @@ func get_cell_data(pos: Vector3) -> Array:
 		for dx in range(-1, 2):
 			for dz in range(-1, 2):
 				
-				var key: String = CELL_TYPES.find_key(get_cell_item(posi + Vector3i(dx, 0, dz)));
+				var key: String = _string_id_of_cell_index(get_cell_item(posi + Vector3i(dx, 0, dz)));
 				
 				# right now monuments are the only >1x1 cells
 				if ([ "monument" ].has(key)):
@@ -51,18 +66,7 @@ func get_cell_data(pos: Vector3) -> Array:
 		get_tree().quit();
 	
 	# find the String identifier that matches the target cell index
-	for key in CELL_TYPES.keys():
-		
-		var value = CELL_TYPES.get(key);
-		
-		if value is MergeGroup:
-			if value.has_index(target):
-				return [posi, key];
-		elif value == target:
-			return [posi, key];
-	
-	# return empty on no match
-	return [posi, ""];
+	return [posi, _string_id_of_cell_index(target)];
 
 func set_cell(pos: Vector3i, _type: String):
 	set_cell_item(pos, 1);
