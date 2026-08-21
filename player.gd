@@ -6,8 +6,6 @@ extends Node3D
 @export var PAN_SPEED_MULT := 0.8;
 @export var PAN_SPEED_SLOW_MULT := 0.4;
 
-const LARGE_CELLS = [ "monument" ];
-
 var velocity : Vector3
 
 func _process(delta: float) -> void:
@@ -41,20 +39,10 @@ func _process(delta: float) -> void:
 	$Corner3.global_position -= velocity * delta;
 	
 	# selection
-	var selected_pos := grid.local_to_map(global_position);
-	var selected_type := grid.get_cell(selected_pos);
+	var cell_data := grid.get_cell_data(global_position);
 	
-	# occupied cells indicate there's a larger than 1x1 cell nearby -- center on that
-	if (selected_type == "occupied"):
-		for dx in range(-1, 2):
-			for dz in range(-1, 2):
-				
-				var type := grid.get_cell(selected_pos + Vector3i(dx, 0, dz));
-				
-				if (LARGE_CELLS.has(type)):
-					
-					selected_pos = selected_pos + Vector3i(dx, 0, dz);
-					selected_type = type;
+	var selected_pos : Vector3i = cell_data[0];
+	var selected_type : String = cell_data[1];
 	
 	print(selected_type);
 	
