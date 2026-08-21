@@ -6,9 +6,9 @@ class MergeGroup:
 	var solo;
 	var full;
 	var side;
-	var corner;
+	var corner; # TODO
 	var end;
-	var tube;
+	var tube; # TODO
 	
 	func has_index(index: int) -> bool:
 		return index == solo or index == full or index == side or index == corner\
@@ -26,7 +26,7 @@ class MergeGroup:
 
 var CELL_TYPES : Dictionary = {
 	"": -1,
-	"wall": MergeGroup.new(1, 4, 1, 1, 5, 1),
+	"wall": MergeGroup.new(1, 4, 6, 1, 5, 1),
 	"occupied": 2,
 	"monument": 3,
 	"gravel": 0
@@ -125,6 +125,15 @@ func _update_merge_cell(pos: Vector3i, type: String):
 			set_cell_item(pos, CELL_TYPES.get(type).end, 10);
 		else:
 			set_cell_item(pos, CELL_TYPES.get(type).end, 0);
+	elif count == 3:
+		if !top:
+			set_cell_item(pos, CELL_TYPES.get(type).side, 22);
+		elif !bottom:
+			set_cell_item(pos, CELL_TYPES.get(type).side, 16);
+		elif !right:
+			set_cell_item(pos, CELL_TYPES.get(type).side, 0);
+		else:
+			set_cell_item(pos, CELL_TYPES.get(type).side, 10);
 	else:
 		set_cell_item(pos, CELL_TYPES.get(type).full);
 
