@@ -14,6 +14,9 @@ uv1_scale = Vector3(0.4, 0.4, 0.4)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
+[sub_resource type="BoxMesh" id="BoxMesh_lxpj2"]
+size = Vector3(0.2, 0.2, 0.2)
+
 [node name="Root" type="Node3D" unique_id=1235117097]
 
 [node name="Moonlight" type="DirectionalLight3D" parent="." unique_id=559473227]
@@ -44,13 +47,28 @@ data = {
 mesh = SubResource("PlaneMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_imqp1")
 
-[node name="PlayerView" type="Node3D" parent="." unique_id=945685676]
+[node name="PlayerView" type="Node3D" parent="." unique_id=945685676 node_paths=PackedStringArray("gridmap")]
 script = ExtResource("2_nxogm")
+gridmap = NodePath("../GridMap")
 
-[node name="Camera" type="Camera3D" parent="PlayerView" unique_id=1150856261]
+[node name="CameraAnchor" type="Node3D" parent="PlayerView" unique_id=310821411]
+
+[node name="Camera" type="Camera3D" parent="PlayerView/CameraAnchor" unique_id=1150856261]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 9, 9)
 projection = 1
 size = 12.0
+
+[node name="Corner0" type="MeshInstance3D" parent="PlayerView" unique_id=1053171651]
+mesh = SubResource("BoxMesh_lxpj2")
+
+[node name="Corner1" type="MeshInstance3D" parent="PlayerView" unique_id=842098735]
+mesh = SubResource("BoxMesh_lxpj2")
+
+[node name="Corner2" type="MeshInstance3D" parent="PlayerView" unique_id=375495023]
+mesh = SubResource("BoxMesh_lxpj2")
+
+[node name="Corner3" type="MeshInstance3D" parent="PlayerView" unique_id=194712079]
+mesh = SubResource("BoxMesh_lxpj2")
 
 [node name="Label" type="Label" parent="." unique_id=16969720]
 anchors_preset = 2
