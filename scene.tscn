@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d3tflhq8vgolo"]
 
-[ext_resource type="Texture2D" uid="uid://pm06j71lvbcl" path="res://test_sprite.png" id="2_3253y"]
 [ext_resource type="Script" uid="uid://bmrhjtsltso2s" path="res://better_gridmap.gd" id="2_m7jmp"]
 [ext_resource type="Script" uid="uid://btguypw88w8b6" path="res://player.gd" id="2_nxogm"]
 [ext_resource type="MeshLibrary" uid="uid://case15hofb14m" path="res://terrain_library.tres" id="3_3253y"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
+[ext_resource type="Texture2D" uid="uid://c38ou85yof2mh" path="res://sprites/queen/queen.png" id="5_m7jmp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(100, 100)
@@ -88,9 +88,10 @@ vertical_alignment = 2
 [node name="Sprite" type="Sprite3D" parent="." unique_id=1524805806]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3.192, 0.5)
 centered = false
-offset = Vector2(-16, 0)
-pixel_size = 0.0625
+offset = Vector2(-128, 0)
+pixel_size = 0.0078126
 billboard = 1
 shaded = true
+alpha_cut = 1
 texture_filter = 0
-texture = ExtResource("2_3253y")
+texture = ExtResource("5_m7jmp")

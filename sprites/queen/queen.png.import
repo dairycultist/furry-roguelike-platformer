@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pm06j71lvbcl"
-path="res://.godot/imported/test_sprite.png-2cbd103c1537a1da4d001014f0ad48da.ctex"
+uid="uid://c38ou85yof2mh"
+path.s3tc="res://.godot/imported/queen.png-e71e44fea2bc9184ca4324da183adff8.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://test_sprite.png"
-dest_files=["res://.godot/imported/test_sprite.png-2cbd103c1537a1da4d001014f0ad48da.ctex"]
+source_file="res://sprites/queen/queen.png"
+dest_files=["res://.godot/imported/queen.png-e71e44fea2bc9184ca4324da183adff8.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

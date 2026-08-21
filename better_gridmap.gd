@@ -93,6 +93,7 @@ func can_set_cell(pos: Vector3i, type: String) -> bool:
 	else:
 		return get_cell_item(posi) < 0;
 
-## 
+## Sets a cell (without checking its contents!), accounting for MergeGroups and
+## 3x3 cells (automatically placing/removing the surrounding "occupied" cells).
 func set_cell(pos: Vector3i, _type: String):
 	set_cell_item(pos, 1);
