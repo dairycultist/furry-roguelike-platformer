@@ -6,6 +6,8 @@ extends Node3D
 @export var PAN_SPEED_MULT := 0.8;
 @export var PAN_SPEED_SLOW_MULT := 0.4;
 
+const LARGE_CELLS = [ 3 ];
+
 var velocity : Vector3
 
 func _process(delta: float) -> void:
@@ -49,10 +51,12 @@ func _process(delta: float) -> void:
 				
 				var type := gridmap.get_cell_item(selected_pos + Vector3i(dx, 0, dz));
 				
-				if (type != 2 and type != -1):
+				if (LARGE_CELLS.has(type)):
 					
 					selected_pos = selected_pos + Vector3i(dx, 0, dz);
 					selected_type = type;
+	
+	print(selected_type);
 	
 	if (selected_type == 3):
 		$Corner0.global_position = lerp($Corner0.global_position, Vector3(selected_pos) + Vector3(-1.0, 0.0, -1.0), 10.0 * delta);
