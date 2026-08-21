@@ -1,6 +1,6 @@
 # Furry Roguelike Platformer
 
-rimworld, strategy townbuilder, medieval buns, hmmm
+rimworld, strategy townbuilder, medieval buns, "protect the monument" type gameplay, hmmm
 
 https://x.com/DimkaTheMonstr/status/2089379895851839758
 

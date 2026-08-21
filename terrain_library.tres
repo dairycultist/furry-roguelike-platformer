@@ -2,8 +2,13 @@
 
 [ext_resource type="ArrayMesh" uid="uid://bgg7avvbrroey" path="res://gravel.obj" id="1_imqp1"]
 [ext_resource type="ArrayMesh" uid="uid://mfww5oww1q63" path="res://wall.obj" id="2_emhua"]
+[ext_resource type="ArrayMesh" uid="uid://dpvqn351wix0r" path="res://monument.obj" id="3_2k8am"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emhua"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2k8am"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k8uyc"]
 
 [resource]
 item/0/name = ""
@@ -20,3 +25,16 @@ item/1/mesh_cast_shadow = 1
 item/1/shapes = [SubResource("BoxShape3D_emhua"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/navigation_layers = 1
+item/2/name = "Occupied"
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/mesh_cast_shadow = 1
+item/2/shapes = [SubResource("BoxShape3D_2k8am"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
+item/3/name = ""
+item/3/mesh = ExtResource("3_2k8am")
+item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/mesh_cast_shadow = 1
+item/3/shapes = [SubResource("BoxShape3D_k8uyc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/navigation_layers = 1
