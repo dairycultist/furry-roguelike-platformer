@@ -93,7 +93,44 @@ func can_set_cell(pos: Vector3i, type: String) -> bool:
 	else:
 		return get_cell_item(posi) < 0;
 
-## Sets a cell (without checking its contents!), accounting for MergeGroups and
-## 3x3 cells (automatically placing/removing the surrounding "occupied" cells).
-func set_cell(pos: Vector3i, _type: String):
-	set_cell_item(pos, 1);
+## Sets a cell (without checking its contents; do that yourself with
+## can_set_cell), accounting for MergeGroups and 3x3 cells (automatically
+## placing/removing the surrounding "occupied" cells).
+func set_cell(pos: Vector3i, type: String):
+	
+	var value = CELL_TYPES.get(type);
+
+	if value is MergeGroup:
+		
+		pass; # TODO
+		
+	elif value == -1:
+		
+		if is_cell_big(_string_id_of_cell_index(get_cell_item(pos))):
+			set_cell_item(pos + Vector3i( 1, 0,  1), -1);
+			set_cell_item(pos + Vector3i( 1, 0,  0), -1);
+			set_cell_item(pos + Vector3i( 1, 0, -1), -1);
+			set_cell_item(pos + Vector3i( 0, 0,  1), -1);
+			set_cell_item(pos + Vector3i( 0, 0, -1), -1);
+			set_cell_item(pos + Vector3i(-1, 0,  1), -1);
+			set_cell_item(pos + Vector3i(-1, 0,  0), -1);
+			set_cell_item(pos + Vector3i(-1, 0, -1), -1);
+		
+		set_cell_item(pos, -1);
+		
+	elif is_cell_big(type):
+		
+		var occupied_value = CELL_TYPES.get("occupied");
+		
+		set_cell_item(pos + Vector3i( 1, 0,  1), occupied_value);
+		set_cell_item(pos + Vector3i( 1, 0,  0), occupied_value);
+		set_cell_item(pos + Vector3i( 1, 0, -1), occupied_value);
+		set_cell_item(pos + Vector3i( 0, 0,  1), occupied_value);
+		set_cell_item(pos, value);
+		set_cell_item(pos + Vector3i( 0, 0, -1), occupied_value);
+		set_cell_item(pos + Vector3i(-1, 0,  1), occupied_value);
+		set_cell_item(pos + Vector3i(-1, 0,  0), occupied_value);
+		set_cell_item(pos + Vector3i(-1, 0, -1), occupied_value);
+		
+	else:
+		set_cell_item(pos, value);

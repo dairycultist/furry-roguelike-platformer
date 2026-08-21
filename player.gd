@@ -57,5 +57,5 @@ func _process(delta: float) -> void:
 		$Corner2.global_position = lerp($Corner2.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 1.0), 10.0 * delta);
 		$Corner3.global_position = lerp($Corner3.global_position, Vector3(selected_pos) + Vector3(0.0, 0.0, 1.0), 10.0 * delta);
 	
-	if (Input.is_action_just_pressed("use_tool") and grid.can_set_cell(selected_pos, "wall")):
-		grid.set_cell(selected_pos, "wall");
+	if (Input.is_action_just_pressed("use_tool") and grid.can_set_cell(selected_pos, "")):
+		grid.set_cell(selected_pos, "");
