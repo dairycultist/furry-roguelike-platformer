@@ -7,24 +7,26 @@ extends Node3D
 var velocity : Vector3
 
 func _process(delta: float) -> void:
-
-	var dzoom := Input.get_axis("zoom_in", "zoom_out");
-
-	$Camera.size = clamp($Camera.size + dzoom * ZOOM_SPEED * delta, 6.0, 20.0);
-
-	if (!dzoom):
-		global_rotation.y += Input.get_axis("turn_right", "turn_left") * delta;
-
-	var direction_slow := Input.get_vector("pan_left_slow", "pan_right_slow", "pan_up_slow", "pan_down_slow");
-
-	if (direction_slow):
-		velocity = global_basis * Vector3(direction_slow.x, 0, direction_slow.y) * $Camera.size * PAN_SPEED_SLOW_MULT;
-	else:
-		var direction := Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down");
+	
+	var camalt := Input.get_axis("camalt_negative", "camalt_positive");
+	var pan := Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down");
+	
+	if (Input.is_action_pressed("modify_action")):
 		
-		if (direction):
-			velocity = global_basis * Vector3(direction.x, 0, direction.y) * $Camera.size * PAN_SPEED_MULT;
+		$Camera.size = clamp($Camera.size + camalt * ZOOM_SPEED * delta, 6.0, 20.0);
+		
+		if (pan):
+			velocity = global_basis * Vector3(pan.x, 0, pan.y) * $Camera.size * PAN_SPEED_SLOW_MULT;
 		else:
 			velocity = lerp(velocity, Vector3.ZERO, 10.0 * delta);
-	
+		
+	else:
+		
+		global_rotation.y += camalt * delta;
+		
+		if (pan):
+			velocity = global_basis * Vector3(pan.x, 0, pan.y) * $Camera.size * PAN_SPEED_MULT;
+		else:
+			velocity = lerp(velocity, Vector3.ZERO, 10.0 * delta);
+
 	global_position += velocity * delta;
