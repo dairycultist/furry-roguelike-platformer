@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 	
 	print(selected_type);
 	
-	if (selected_type == "monument"):
+	if (grid.is_cell_big(selected_type)):
 		$Corner0.global_position = lerp($Corner0.global_position, Vector3(selected_pos) + Vector3(-1.0, 0.0, -1.0), 10.0 * delta);
 		$Corner1.global_position = lerp($Corner1.global_position, Vector3(selected_pos) + Vector3( 2.0, 0.0, -1.0), 10.0 * delta);
 		$Corner2.global_position = lerp($Corner2.global_position, Vector3(selected_pos) + Vector3( 2.0, 0.0,  2.0), 10.0 * delta);

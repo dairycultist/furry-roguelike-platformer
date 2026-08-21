@@ -44,6 +44,10 @@ func _string_id_of_cell_index(index: int) -> String:
 	# return empty on no match
 	return "";
 
+func is_cell_big(cell_type: String) -> bool:
+	
+	return [ "monument" ].has(cell_type);
+
 ## Returns an array where [0]=Vector3i cell position, [1]=String cell type
 func get_cell_data(pos: Vector3) -> Array:
 	
@@ -58,11 +62,11 @@ func get_cell_data(pos: Vector3) -> Array:
 				
 				var key: String = _string_id_of_cell_index(get_cell_item(posi + Vector3i(dx, 0, dz)));
 				
-				# right now monuments are the only >1x1 cells
-				if ([ "monument" ].has(key)):
+				# right now monuments are the only 3x3 cells
+				if (is_cell_big(key)):
 					return [posi + Vector3i(dx, 0, dz), key];
 		
-		push_error("Failed to find a >1x1 cell by occupied cell at " + str(posi.x) + "," + str(posi.y));
+		print("Failed to find a 3x3 cell next to the occupied cell at (" + str(posi.x) + "," + str(posi.z) + ")");
 		get_tree().quit();
 	
 	# find the String identifier that matches the target cell index
