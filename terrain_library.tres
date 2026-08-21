@@ -4,6 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://mfww5oww1q63" path="res://cell meshes/wall_solo.obj" id="2_ommrs"]
 [ext_resource type="ArrayMesh" uid="uid://dpvqn351wix0r" path="res://cell meshes/monument.obj" id="3_u5oq6"]
 [ext_resource type="ArrayMesh" uid="uid://b21olxinejdkw" path="res://cell meshes/wall_full.obj" id="4_g527c"]
+[ext_resource type="ArrayMesh" uid="uid://biuxvk7hjps4n" path="res://cell meshes/wall_end.obj" id="5_ommrs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emhua"]
 
@@ -12,6 +13,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8uyc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jocre"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u5oq6"]
 
 [resource]
 item/0/name = "Gravel"
@@ -48,3 +51,10 @@ item/4/mesh_cast_shadow = 1
 item/4/shapes = [SubResource("BoxShape3D_jocre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/4/navigation_layers = 1
+item/5/name = "WallEnd"
+item/5/mesh = ExtResource("5_ommrs")
+item/5/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/mesh_cast_shadow = 1
+item/5/shapes = [SubResource("BoxShape3D_u5oq6"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/5/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/navigation_layers = 1

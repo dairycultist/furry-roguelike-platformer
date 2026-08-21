@@ -1,29 +1,32 @@
 extends GridMap
 class_name BetterGridMap
 
-# 0, 22, 10, 16
-
 class MergeGroup:
 	
 	var solo;
 	var full;
 	var side;
 	var corner;
+	var end;
+	var tube;
 	
 	func has_index(index: int) -> bool:
-		return index == solo or index == full or index == side or index == corner;
+		return index == solo or index == full or index == side or index == corner\
+			or index == end or index == tube;
 	
 	@warning_ignore("shadowed_variable")
-	func _init(solo, full, side, corner):
+	func _init(solo, full, side, corner, end, tube):
 		
-		self.solo = solo;
-		self.full = full;
-		self.side = side;
+		self.solo   = solo;
+		self.full   = full;
+		self.side   = side;
 		self.corner = corner;
+		self.end    = end;
+		self.tube   = tube;
 
 var CELL_TYPES : Dictionary = {
 	"": -1,
-	"wall": MergeGroup.new(1, 4, 1, 1),
+	"wall": MergeGroup.new(1, 4, 1, 1, 5, 1),
 	"occupied": 2,
 	"monument": 3,
 	"gravel": 0
@@ -104,9 +107,24 @@ func _update_merge_cell(pos: Vector3i, type: String):
 	var bottom := _string_id_of_cell_index(get_cell_item(pos - Vector3i(0, 0, 1))) == type;
 	var left   := _string_id_of_cell_index(get_cell_item(pos - Vector3i(1, 0, 0))) == type;
 	var right  := _string_id_of_cell_index(get_cell_item(pos + Vector3i(1, 0, 0))) == type;
+	var count = 0;
 	
-	if !top and !bottom and !left and !right:
+	if top:    count += 1;
+	if bottom: count += 1;
+	if left:   count += 1;
+	if right:  count += 1;
+	
+	if count == 0:
 		set_cell_item(pos, CELL_TYPES.get(type).solo);
+	elif count == 1:
+		if top:
+			set_cell_item(pos, CELL_TYPES.get(type).end, 16);
+		elif bottom:
+			set_cell_item(pos, CELL_TYPES.get(type).end, 22);
+		elif right:
+			set_cell_item(pos, CELL_TYPES.get(type).end, 10);
+		else:
+			set_cell_item(pos, CELL_TYPES.get(type).end, 0);
 	else:
 		set_cell_item(pos, CELL_TYPES.get(type).full);
 

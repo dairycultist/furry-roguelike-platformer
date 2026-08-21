@@ -5,8 +5,6 @@
 [ext_resource type="MeshLibrary" uid="uid://case15hofb14m" path="res://terrain_library.tres" id="3_3253y"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
 [ext_resource type="Texture2D" uid="uid://c38ou85yof2mh" path="res://sprites/queen/queen.png" id="5_m7jmp"]
-[ext_resource type="ArrayMesh" uid="uid://b21olxinejdkw" path="res://cell meshes/wall_full.obj" id="6_ni31j"]
-[ext_resource type="ArrayMesh" uid="uid://mfww5oww1q63" path="res://cell meshes/wall_solo.obj" id="7_xlvrw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(100, 100)
@@ -97,11 +95,3 @@ shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("5_m7jmp")
-
-[node name="WallFull" type="MeshInstance3D" parent="." unique_id=1275030527]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
-mesh = ExtResource("6_ni31j")
-
-[node name="WallSolo" type="MeshInstance3D" parent="." unique_id=1826344129]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
-mesh = ExtResource("7_xlvrw")
