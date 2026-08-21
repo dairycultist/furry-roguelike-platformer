@@ -23,7 +23,7 @@ class MergeGroup:
 
 var CELL_TYPES : Dictionary = {
 	"": -1,
-	"wall": MergeGroup.new(1, 1, 1, 1),
+	"wall": MergeGroup.new(1, 4, 1, 1),
 	"occupied": 2,
 	"monument": 3,
 	"gravel": 0
@@ -93,6 +93,23 @@ func can_set_cell(pos: Vector3i, type: String) -> bool:
 	else:
 		return get_cell_item(posi) < 0;
 
+func _update_merge_cell(pos: Vector3i, type: String):
+	
+	# if this isn't the type of cell we expect, don't update it
+	if _string_id_of_cell_index(get_cell_item(pos)) != type:
+		return;
+	
+	# get neighborhood booleans
+	var top    := _string_id_of_cell_index(get_cell_item(pos + Vector3i(0, 0, 1))) == type;
+	var bottom := _string_id_of_cell_index(get_cell_item(pos - Vector3i(0, 0, 1))) == type;
+	var left   := _string_id_of_cell_index(get_cell_item(pos - Vector3i(1, 0, 0))) == type;
+	var right  := _string_id_of_cell_index(get_cell_item(pos + Vector3i(1, 0, 0))) == type;
+	
+	if !top and !bottom and !left and !right:
+		set_cell_item(pos, CELL_TYPES.get(type).solo);
+	else:
+		set_cell_item(pos, CELL_TYPES.get(type).full);
+
 ## Sets a cell (without checking its contents; do that yourself with
 ## can_set_cell), accounting for MergeGroups and 3x3 cells (automatically
 ## placing/removing the surrounding "occupied" cells).
@@ -102,11 +119,20 @@ func set_cell(pos: Vector3i, type: String):
 
 	if value is MergeGroup:
 		
-		pass; # TODO
+		set_cell_item(pos, value.full);
+		
+		_update_merge_cell(pos, type);
+		_update_merge_cell(pos + Vector3i(0, 0, 1), type);
+		_update_merge_cell(pos - Vector3i(0, 0, 1), type);
+		_update_merge_cell(pos - Vector3i(1, 0, 0), type);
+		_update_merge_cell(pos + Vector3i(1, 0, 0), type);
 		
 	elif value == -1:
 		
-		if is_cell_big(_string_id_of_cell_index(get_cell_item(pos))):
+		var to_destroy := _string_id_of_cell_index(get_cell_item(pos));
+		
+		# if we're destroying a big cell, destroy its surrounding occupied cells
+		if is_cell_big(to_destroy):
 			set_cell_item(pos + Vector3i( 1, 0,  1), -1);
 			set_cell_item(pos + Vector3i( 1, 0,  0), -1);
 			set_cell_item(pos + Vector3i( 1, 0, -1), -1);
@@ -116,7 +142,16 @@ func set_cell(pos: Vector3i, type: String):
 			set_cell_item(pos + Vector3i(-1, 0,  0), -1);
 			set_cell_item(pos + Vector3i(-1, 0, -1), -1);
 		
+		# destroy that mf
 		set_cell_item(pos, -1);
+		
+		# if we destroyed a merge cell, update the surrounding merge cells
+		# of the same type
+		if CELL_TYPES.get(to_destroy) is MergeGroup:
+			_update_merge_cell(pos + Vector3i(0, 0, 1), to_destroy);
+			_update_merge_cell(pos - Vector3i(0, 0, 1), to_destroy);
+			_update_merge_cell(pos - Vector3i(1, 0, 0), to_destroy);
+			_update_merge_cell(pos + Vector3i(1, 0, 0), to_destroy);
 		
 	elif is_cell_big(type):
 		
