@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://wx2falj44yrt"]
+
+[ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://turret.gd" id="1_coqkk"]
+[ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://turret/turret_base.obj" id="2_2kw7u"]
+[ext_resource type="ArrayMesh" uid="uid://bbfmffnqawaxr" path="res://turret/turret_head.obj" id="3_mhatg"]
+[ext_resource type="ArrayMesh" uid="uid://ck8wd4jj54rim" path="res://turret/turret_barrel.obj" id="4_vt3mo"]
+
+[node name="Turret" type="Node3D" unique_id=1625817297 node_paths=PackedStringArray("target")]
+script = ExtResource("1_coqkk")
+target = NodePath("")
+
+[node name="TurretBase" type="MeshInstance3D" parent="." unique_id=798336857]
+mesh = ExtResource("2_2kw7u")
+
+[node name="TurretHead" type="MeshInstance3D" parent="." unique_id=823903376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = ExtResource("3_mhatg")
+
+[node name="TurretBarrel" type="MeshInstance3D" parent="TurretHead" unique_id=569734477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22995989, 0)
+mesh = ExtResource("4_vt3mo")

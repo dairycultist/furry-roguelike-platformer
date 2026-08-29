@@ -1,5 +1,7 @@
 extends Node3D;
 
+const turret_prefab = preload("res://turret/turret.tscn");
+
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;
 @export var PAN_SPEED_SLOW_MULT := 0.4;
@@ -51,5 +53,10 @@ func _process(delta: float) -> void:
 	
 	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 10.0 * delta);
 	
-	if Input.is_action_just_pressed("use_tool"):
-		print(grid.get_cell_item(selected_pos));
+	if Input.is_action_just_pressed("use_tool") and not pos_invalid:
+		
+		var turret = turret_prefab.instantiate();
+		
+		grid.add_child(turret);
+		
+		turret.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);
