@@ -9,9 +9,12 @@ const turret_prefab = preload("res://turret/turret.tscn");
 var velocity : Vector3;
 
 var grid : GridMap;
+var enemy_path : Path3D;
 
 func _ready() -> void:
+	
 	grid = get_parent();
+	enemy_path = grid.get_node("EnemyPath");
 
 func _process(delta: float) -> void:
 	
@@ -58,5 +61,5 @@ func _process(delta: float) -> void:
 		var turret = turret_prefab.instantiate();
 		
 		grid.add_child(turret);
-		
+		turret.enemy_path = enemy_path;
 		turret.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);

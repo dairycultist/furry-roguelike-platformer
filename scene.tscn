@@ -130,13 +130,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 
-[node name="Path3D" type="Path3D" parent="." unique_id=320968486]
+[node name="EnemyPath" type="Path3D" parent="GridMap" unique_id=320968486]
 curve = SubResource("Curve3D_y2354")
 
-[node name="Enemy" type="PathFollow3D" parent="Path3D" unique_id=1279003229]
+[node name="Enemy" type="PathFollow3D" parent="GridMap/EnemyPath" unique_id=1279003229]
 transform = Transform3D(0.6542781, 0, -0.7562211, 0, 1.0000056, 0, 0.7562211, 0, 0.6542781, -13.951372, 0, 5.6567516)
 script = ExtResource("7_ni31j")
 
-[node name="Mesh" type="MeshInstance3D" parent="Path3D/Enemy" unique_id=1995363100]
+[node name="Mesh" type="MeshInstance3D" parent="GridMap/EnemyPath/Enemy" unique_id=1995363100]
 mesh = SubResource("BoxMesh_x0ryr")
 surface_material_override/0 = SubResource("ShaderMaterial_ni31j")
