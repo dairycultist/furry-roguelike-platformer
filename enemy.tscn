@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cb5sx04t1xbpo"]
+
+[ext_resource type="Script" uid="uid://vnpc4i2w28lh" path="res://enemy.gd" id="1_qi2p4"]
+[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="2_iifgy"]
+[ext_resource type="Texture2D" uid="uid://8sp6e364jbjd" path="res://icon.svg" id="3_epg4t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x0ryr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni31j"]
+render_priority = 0
+shader = ExtResource("2_iifgy")
+shader_parameter/albedo = ExtResource("3_epg4t")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 0.2
+shader_parameter/exponent = 10.0
+
+[node name="Enemy" type="PathFollow3D" unique_id=1505863252]
+transform = Transform3D(0.9999751, 0, 0, 0, 1.0000056, 0, 0, 0, 0.9999751, 0, 0, 0)
+script = ExtResource("1_qi2p4")
+speed = 1.0
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1535816302]
+mesh = SubResource("BoxMesh_x0ryr")
+surface_material_override/0 = SubResource("ShaderMaterial_ni31j")

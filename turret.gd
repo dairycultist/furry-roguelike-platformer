@@ -1,5 +1,6 @@
 extends Node3D
 
+@export var damage : int = 1;
 @export var max_targeting_distance : int = 3;
 
 var enemy_path : Node3D;
@@ -16,7 +17,15 @@ func _process(delta: float) -> void:
 	else:
 		$Radius.visible = false;
 	
-	target = enemy_path.get_child(0); # TEMP, replace with targeting logic
+	# retargeting when no target or target out of range
+	if not target or Vector3(target.global_position.x, 0.0, target.global_position.z).distance_to(global_position) > max_targeting_distance + 0.5:
+		
+		target = null;
+		
+		for enemy in enemy_path.get_children():
+		
+			if Vector3(enemy.global_position.x, 0.0, enemy.global_position.z).distance_to(global_position) <= max_targeting_distance + 0.5:
+				target = enemy;
 	
 	# exhaust cooldown
 	if (not fire_cooldown < 0.0):
@@ -34,6 +43,7 @@ func _process(delta: float) -> void:
 			
 			fire_cooldown = 1.0;
 			$TurretHead/TurretBarrel.scale = Vector3(1.2, 1.2, 0.7);
+			target.attack(damage);
 	
 	else:
 		
