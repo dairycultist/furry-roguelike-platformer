@@ -35,10 +35,10 @@ func _process(delta: float) -> void:
 		else:
 			velocity = lerp(velocity, Vector3.ZERO, 10.0 * delta);
 
+	# update player position (cursor lags behind and is moved separately)
 	var prev_position = global_position;
 
 	global_position += velocity * delta;
-	
 	global_position = global_position.clamp(Vector3(-13, 0, -13), Vector3(12, 0, 12));
 	
 	$Cursor.global_position -= global_position - prev_position;

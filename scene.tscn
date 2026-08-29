@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://btc3b8xr27eyr" path="res://grid_map.gd" id="3_3253y"]
 [ext_resource type="ArrayMesh" uid="uid://chrc7hrfxtyul" path="res://path.obj" id="4_m7jmp"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
+[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://fade.gdshader" id="6_y2354"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(26, 26)
@@ -29,6 +30,9 @@ item/0/shapes = []
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
 
+[sub_resource type="Environment" id="Environment_m7jmp"]
+background_mode = 1
+
 [sub_resource type="BoxMesh" id="BoxMesh_lxpj2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u3cyc"]
@@ -37,6 +41,14 @@ albedo_color = Color(0, 0.5647059, 0.90588236, 0.2784314)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2354"]
 albedo_texture = ExtResource("4_u3cyc")
+
+[sub_resource type="BoxMesh" id="BoxMesh_x0ryr"]
+size = Vector3(4.805, 3.2172852, 26)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oirwl"]
+render_priority = 0
+shader = ExtResource("6_y2354")
+shader_parameter/density_multiplier = 1.0000000475
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
@@ -77,6 +89,7 @@ script = ExtResource("2_nxogm")
 
 [node name="Camera" type="Camera3D" parent="GridMap/Player/CameraAnchor" unique_id=1150856261]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 9, 9)
+environment = SubResource("Environment_m7jmp")
 projection = 1
 size = 12.0
 
@@ -87,3 +100,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 [node name="Path" type="MeshInstance3D" parent="." unique_id=832493960]
 mesh = ExtResource("4_m7jmp")
 surface_material_override/0 = SubResource("StandardMaterial3D_y2354")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=655949727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1.1086426, 0)
+mesh = SubResource("BoxMesh_x0ryr")
+surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
