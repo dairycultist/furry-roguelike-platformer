@@ -1,10 +1,15 @@
-extends Node3D
+extends Node3D;
 
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;
 @export var PAN_SPEED_SLOW_MULT := 0.4;
 
-var velocity : Vector3
+var velocity : Vector3;
+
+var grid : GridMap;
+
+func _ready() -> void:
+	grid = get_parent();
 
 func _process(delta: float) -> void:
 	
@@ -45,4 +50,4 @@ func _process(delta: float) -> void:
 	$Corner3.global_position = lerp($Corner3.global_position, Vector3(selected_pos) + Vector3(0.0, 0.0, 1.0), 10.0 * delta);
 	
 	if Input.is_action_just_pressed("use_tool"):
-		print("use")
+		print(grid.get_cell_item(selected_pos));

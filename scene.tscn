@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d3tflhq8vgolo"]
 
 [ext_resource type="Script" uid="uid://btguypw88w8b6" path="res://player.gd" id="2_nxogm"]
+[ext_resource type="Script" uid="uid://btc3b8xr27eyr" path="res://grid_map.gd" id="3_3253y"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
@@ -11,6 +12,22 @@ albedo_texture = ExtResource("4_u3cyc")
 uv1_scale = Vector3(0.4, 0.4, 0.4)
 uv1_triplanar = true
 uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l71k7"]
+transparency = 4
+albedo_color = Color(0.49803922, 0.65882355, 1, 0.27058825)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oirwl"]
+material = SubResource("StandardMaterial3D_l71k7")
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_lxpj2"]
+item/0/name = "Occupied"
+item/0/mesh = SubResource("BoxMesh_oirwl")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/mesh_cast_shadow = 1
+item/0/shapes = []
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_lxpj2"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -25,28 +42,6 @@ light_specular = 0.0
 mesh = SubResource("PlaneMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_imqp1")
 
-[node name="PlayerView" type="Node3D" parent="." unique_id=945685676]
-script = ExtResource("2_nxogm")
-
-[node name="CameraAnchor" type="Node3D" parent="PlayerView" unique_id=310821411]
-
-[node name="Camera" type="Camera3D" parent="PlayerView/CameraAnchor" unique_id=1150856261]
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 9, 9)
-projection = 1
-size = 12.0
-
-[node name="Corner0" type="MeshInstance3D" parent="PlayerView" unique_id=1053171651]
-mesh = SubResource("BoxMesh_lxpj2")
-
-[node name="Corner1" type="MeshInstance3D" parent="PlayerView" unique_id=842098735]
-mesh = SubResource("BoxMesh_lxpj2")
-
-[node name="Corner2" type="MeshInstance3D" parent="PlayerView" unique_id=375495023]
-mesh = SubResource("BoxMesh_lxpj2")
-
-[node name="Corner3" type="MeshInstance3D" parent="PlayerView" unique_id=194712079]
-mesh = SubResource("BoxMesh_lxpj2")
-
 [node name="Label" type="Label" parent="." unique_id=16969720]
 anchors_preset = 2
 anchor_top = 1.0
@@ -59,3 +54,34 @@ Shift + Z/X - Zoom
 Arrow keys - Pan
 Shift + Arrow keys - Pan slowly"
 vertical_alignment = 2
+
+[node name="GridMap" type="GridMap" parent="." unique_id=269219875]
+mesh_library = SubResource("MeshLibrary_lxpj2")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 2, 1, 0, 1, 1, 0, 0, 2, 0, 65535, 2, 0, 65534, 2, 0, 65534, 1, 0, 65535, 65535, 0, 1, 65533, 0, 1, 65534, 0, 2, 65534, 0, 3, 65534, 0, 0, 65534, 0, 0, 65533, 0, 65535, 65533, 0, 65534, 65533, 0, 65534, 65532, 0, 65533, 65532, 0, 65533, 65533, 0)
+}
+script = ExtResource("3_3253y")
+occupied_material = SubResource("StandardMaterial3D_l71k7")
+
+[node name="Player" type="Node3D" parent="GridMap" unique_id=945685676]
+script = ExtResource("2_nxogm")
+
+[node name="CameraAnchor" type="Node3D" parent="GridMap/Player" unique_id=310821411]
+
+[node name="Camera" type="Camera3D" parent="GridMap/Player/CameraAnchor" unique_id=1150856261]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 9, 9)
+projection = 1
+size = 12.0
+
+[node name="Corner0" type="MeshInstance3D" parent="GridMap/Player" unique_id=1053171651]
+mesh = SubResource("BoxMesh_lxpj2")
+
+[node name="Corner1" type="MeshInstance3D" parent="GridMap/Player" unique_id=842098735]
+mesh = SubResource("BoxMesh_lxpj2")
+
+[node name="Corner2" type="MeshInstance3D" parent="GridMap/Player" unique_id=375495023]
+mesh = SubResource("BoxMesh_lxpj2")
+
+[node name="Corner3" type="MeshInstance3D" parent="GridMap/Player" unique_id=194712079]
+mesh = SubResource("BoxMesh_lxpj2")
