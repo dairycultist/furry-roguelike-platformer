@@ -7,9 +7,15 @@ var target : Node3D;
 
 var fire_cooldown : float;
 
+var poked : bool;
+
 func _process(delta: float) -> void:
 	
-	$Radius.size = Vector3(1.0 + max_targeting_distance * 2, 2.0, 1.0 + max_targeting_distance * 2) # TEMP idk how im gonna set size fr but whatever
+	if poked:
+		poked = false;
+	else:
+		$Radius.visible = false;
+	
 	target = enemy_path.get_child(0); # TEMP, replace with targeting logic
 	
 	# exhaust cooldown
@@ -17,7 +23,7 @@ func _process(delta: float) -> void:
 		fire_cooldown -= delta;
 	
 	# turret animation
-	$TurretHead/TurretBarrel.scale.z = lerp($TurretHead/TurretBarrel.scale.z, 1.0, 3.0 * delta);
+	$TurretHead/TurretBarrel.scale = lerp($TurretHead/TurretBarrel.scale, Vector3.ONE, 5.0 * delta);
 	
 	if target:
 	
@@ -27,8 +33,15 @@ func _process(delta: float) -> void:
 		if (fire_cooldown < 0.0):
 			
 			fire_cooldown = 1.0;
-			$TurretHead/TurretBarrel.scale.z = 0.7;
+			$TurretHead/TurretBarrel.scale = Vector3(1.2, 1.2, 0.7);
 	
 	else:
 		
 		$TurretHead.global_rotation.y += 0.5 * delta;
+
+func poke():
+	
+	poked = true;
+	
+	$Radius.size = Vector3(1.0 + max_targeting_distance * 2, 2.0, 1.0 + max_targeting_distance * 2);
+	$Radius.visible = true;
