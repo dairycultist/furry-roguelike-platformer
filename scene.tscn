@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://btc3b8xr27eyr" path="res://grid_map.gd" id="3_3253y"]
 [ext_resource type="ArrayMesh" uid="uid://chrc7hrfxtyul" path="res://path.obj" id="4_m7jmp"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
+[ext_resource type="Script" uid="uid://vnpc4i2w28lh" path="res://enemy.gd" id="7_ni31j"]
+[ext_resource type="Texture2D" uid="uid://8sp6e364jbjd" path="res://icon.svg" id="8_xlvrw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(26, 26)
@@ -15,6 +17,16 @@ render_priority = 0
 shader = ExtResource("1_y2354")
 shader_parameter/albedo = ExtResource("1_m7jmp")
 shader_parameter/uv_scale = Vector2(13, 13)
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 0.2
+shader_parameter/exponent = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2354"]
+render_priority = 0
+shader = ExtResource("1_y2354")
+shader_parameter/albedo = ExtResource("4_u3cyc")
+shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
@@ -45,22 +57,24 @@ background_mode = 1
 transparency = 4
 albedo_color = Color(0, 0.5647059, 0.90588236, 0.2784314)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2354"]
+[sub_resource type="Curve3D" id="Curve3D_y2354"]
+_data = {
+"points": PackedVector3Array(-3.3144503, 0, 2.867643, 3.3144503, 0, -2.867643, -13.951372, 0, 5.6567516, -2.0853896, 0, -0.06837368, 2.0853896, 0, 0.06837368, -8.077627, 0, 3.1005878, -3.0084305, 0, 0.44442654, 3.0084305, 0, -0.44442654, 1.0502259, 0, 8.433718, -0.04241371, 0, 1.5027637, 0.04241371, 0, -1.5027637, 4.7082057, 0, 4.775739, 2.1102924, 0, 0.35171527, -2.1102924, 0, -0.35171527, 1.4262825, 0, 0.9126392, 1.3775504, 0, 3.0188885, -1.3775504, 0, -3.0188885, -4.7456927, 0, -1.3728538, -1.4361696, 0, -0.3810253, 1.4361696, 0, 0.3810253, -1.2578499, 0, -5.095173, -0.94403267, 0, 0.019602299, 0.94403267, 0, -0.019602299, 5.131643, 0, -1.6659501, -0.4444294, 0, 3.0426183, 0.4444294, 0, -3.0426183, 8.844799, 0, -4.52305, 0.51280403, 0, 0.4444275, -0.51280403, 0, -0.4444275, 3.3065505, 0, -14.403013),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="BoxMesh" id="BoxMesh_x0ryr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni31j"]
 render_priority = 0
 shader = ExtResource("1_y2354")
-shader_parameter/albedo = ExtResource("4_u3cyc")
+shader_parameter/albedo = ExtResource("8_xlvrw")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
-
-[sub_resource type="Curve3D" id="Curve3D_y2354"]
-_data = {
-"points": PackedVector3Array(-3.1385918, 0, 3.190049, 3.1385918, 0, -3.190049, -13.951372, 0, 5.6567516, -1.5534091, 0, 0.058619022, 1.5534091, 0, -0.058619022, -8.0869875, 0, 3.0528953, -3.546462, 0, -0.17585754, 3.546462, 0, 0.17585754, 0.8817517, 0, 8.416552, 0.02930832, 0, 1.1137643, -0.02930832, 0, -1.1137643, 4.7506194, 0, 4.401137, 2.1102924, 0, 0.35171527, -2.1102924, 0, -0.35171527, 1.7317274, 0, 0.854675, 1.3775504, 0, 3.0188885, -1.3775504, 0, -3.0188885, -4.8336215, 0, -1.3435442, -1.4361696, 0, -0.3810253, 1.4361696, 0, 0.3810253, -1.3164694, 0, -5.2710304, -1.6413381, 0, -0.26378655, 1.6413381, 0, 0.26378655, 5.131643, 0, -1.6659501, -0.8499799, 0, 2.22753, 0.8499799, 0, -2.22753, 8.707415, 0, -4.0107183, 0.78, 0, 0, 0, 0, 0, 4.3109717, 0, -13.301861),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 10
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
@@ -69,9 +83,12 @@ transform = Transform3D(0.8089059, 0.48318726, -0.33496475, 0, 0.56972784, 0.821
 light_specular = 0.0
 
 [node name="GroundMesh" type="MeshInstance3D" parent="." unique_id=421907200]
-visible = false
 mesh = SubResource("PlaneMesh_lxpj2")
 surface_material_override/0 = SubResource("ShaderMaterial_m7jmp")
+
+[node name="PathMesh" type="MeshInstance3D" parent="." unique_id=832493960]
+mesh = ExtResource("4_m7jmp")
+surface_material_override/0 = SubResource("ShaderMaterial_y2354")
 
 [node name="Label" type="Label" parent="." unique_id=16969720]
 anchors_preset = 2
@@ -87,7 +104,6 @@ Shift + Arrow keys - Pan slowly"
 vertical_alignment = 2
 
 [node name="GridMap" type="GridMap" parent="." unique_id=269219875]
-visible = false
 mesh_library = SubResource("MeshLibrary_lxpj2")
 cell_size = Vector3(1, 1, 1)
 data = {
@@ -114,10 +130,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 
-[node name="Path" type="MeshInstance3D" parent="." unique_id=832493960]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-mesh = ExtResource("4_m7jmp")
-surface_material_override/0 = SubResource("ShaderMaterial_y2354")
-
 [node name="Path3D" type="Path3D" parent="." unique_id=320968486]
 curve = SubResource("Curve3D_y2354")
+
+[node name="Enemy" type="PathFollow3D" parent="Path3D" unique_id=1279003229]
+transform = Transform3D(0.6542781, 0, -0.7562211, 0, 1.0000056, 0, 0.7562211, 0, 0.6542781, -13.951372, 0, 5.6567516)
+script = ExtResource("7_ni31j")
+
+[node name="Mesh" type="MeshInstance3D" parent="Path3D/Enemy" unique_id=1995363100]
+mesh = SubResource("BoxMesh_x0ryr")
+surface_material_override/0 = SubResource("ShaderMaterial_ni31j")
