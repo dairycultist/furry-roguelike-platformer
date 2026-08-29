@@ -1,13 +1,10 @@
 [gd_scene format=3 uid="uid://d3tflhq8vgolo"]
 
-[ext_resource type="Script" uid="uid://bmrhjtsltso2s" path="res://better_gridmap.gd" id="2_m7jmp"]
 [ext_resource type="Script" uid="uid://btguypw88w8b6" path="res://player.gd" id="2_nxogm"]
-[ext_resource type="MeshLibrary" uid="uid://case15hofb14m" path="res://terrain_library.tres" id="3_3253y"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
-[ext_resource type="Texture2D" uid="uid://c38ou85yof2mh" path="res://sprites/queen/queen.png" id="5_m7jmp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
-size = Vector2(100, 100)
+size = Vector2(25, 25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imqp1"]
 albedo_texture = ExtResource("4_u3cyc")
@@ -20,38 +17,16 @@ size = Vector3(0.2, 0.2, 0.2)
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
-[node name="Moonlight" type="DirectionalLight3D" parent="." unique_id=559473227]
-transform = Transform3D(0.8089059, 0.48318726, -0.33496472, 0, 0.56972784, 0.82183343, 0.5879382, -0.6647859, 0.46085617, 0, 0, 0)
-visible = false
-light_color = Color(0.02919674, 0.34930426, 0.5773023, 1)
-light_specular = 0.0
-
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1031219095]
 transform = Transform3D(0.8089059, 0.48318726, -0.33496475, 0, 0.56972784, 0.82183343, 0.5879382, -0.6647859, 0.46085617, 0, 0, 0)
 light_specular = 0.0
-
-[node name="Reflected" type="DirectionalLight3D" parent="." unique_id=2125899758]
-transform = Transform3D(0.24963179, -0.6446956, 0.72253144, -0.43806398, -0.7406225, -0.50948834, 0.86358786, -0.18933044, -0.4673007, 0, 0, 0)
-light_color = Color(0.8738732, 0.6915346, 0.7171928, 1)
-light_energy = 0.4
-light_specular = 0.0
-
-[node name="GridMap" type="GridMap" parent="." unique_id=171594152]
-mesh_library = ExtResource("3_3253y")
-cell_size = Vector3(1, 1, 1)
-cell_center_y = false
-data = {
-"cells": PackedInt32Array(0, 0, 3, 1, 0, 2, 2, 0, 0, 2, 1, 0, 1, 1, 2, 0, 1, 2, 3, 0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 2, 3, 0, 1, 3, 0, 0, 3, 0, 65535, 3, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 65535, 0, 2, 65534, 0, 0, 65535, 1, 2, 65534, 1, 0, 65534, 2, 0, 65534, 3, 0, 65534, 65535, 0, 65535, 65535, 2, 0, 65535, 2, 1, 65535, 2, 2, 65535, 0, 3, 65535, 0, 3, 65534, 0, 2, 65534, 0, 1, 65534, 0, 0, 65534, 0, 65535, 65534, 0, 65534, 65534, 0, 65533, 65534, 0, 65533, 65533, 0, 65534, 65533, 0, 65535, 65533, 0, 0, 65533, 0, 1, 65533, 0, 3, 65533, 0, 2, 65533, 0, 65533, 2, 0, 65533, 1, 0, 65533, 0, 0, 65533, 65535, 0, 65533, 3, 0)
-}
-script = ExtResource("2_m7jmp")
 
 [node name="GroundMesh" type="MeshInstance3D" parent="." unique_id=421907200]
 mesh = SubResource("PlaneMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_imqp1")
 
-[node name="PlayerView" type="Node3D" parent="." unique_id=945685676 node_paths=PackedStringArray("grid")]
+[node name="PlayerView" type="Node3D" parent="." unique_id=945685676]
 script = ExtResource("2_nxogm")
-grid = NodePath("../GridMap")
 
 [node name="CameraAnchor" type="Node3D" parent="PlayerView" unique_id=310821411]
 
@@ -84,14 +59,3 @@ Shift + Z/X - Zoom
 Arrow keys - Pan
 Shift + Arrow keys - Pan slowly"
 vertical_alignment = 2
-
-[node name="Sprite" type="Sprite3D" parent="." unique_id=1524805806]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3.192, 0.5)
-centered = false
-offset = Vector2(-128, 0)
-pixel_size = 0.0078126
-billboard = 1
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("5_m7jmp")

@@ -1,7 +1,5 @@
 extends Node3D
 
-@export var grid : BetterGridMap;
-
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;
 @export var PAN_SPEED_SLOW_MULT := 0.4;
@@ -39,21 +37,12 @@ func _process(delta: float) -> void:
 	$Corner3.global_position -= velocity * delta;
 	
 	# selection
-	var cell_data := grid.get_cell_data(global_position);
+	var selected_pos : Vector3i = Vector3i(global_position);
 	
-	var selected_pos  : Vector3i = cell_data[0];
-	var selected_type : String   = cell_data[1];
+	$Corner0.global_position = lerp($Corner0.global_position, Vector3(selected_pos), 10.0 * delta);
+	$Corner1.global_position = lerp($Corner1.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 0.0), 10.0 * delta);
+	$Corner2.global_position = lerp($Corner2.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 1.0), 10.0 * delta);
+	$Corner3.global_position = lerp($Corner3.global_position, Vector3(selected_pos) + Vector3(0.0, 0.0, 1.0), 10.0 * delta);
 	
-	if (grid.is_cell_big(selected_type)):
-		$Corner0.global_position = lerp($Corner0.global_position, Vector3(selected_pos) + Vector3(-1.0, 0.0, -1.0), 10.0 * delta);
-		$Corner1.global_position = lerp($Corner1.global_position, Vector3(selected_pos) + Vector3( 2.0, 0.0, -1.0), 10.0 * delta);
-		$Corner2.global_position = lerp($Corner2.global_position, Vector3(selected_pos) + Vector3( 2.0, 0.0,  2.0), 10.0 * delta);
-		$Corner3.global_position = lerp($Corner3.global_position, Vector3(selected_pos) + Vector3(-1.0, 0.0,  2.0), 10.0 * delta);
-	else:
-		$Corner0.global_position = lerp($Corner0.global_position, Vector3(selected_pos), 10.0 * delta);
-		$Corner1.global_position = lerp($Corner1.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 0.0), 10.0 * delta);
-		$Corner2.global_position = lerp($Corner2.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 1.0), 10.0 * delta);
-		$Corner3.global_position = lerp($Corner3.global_position, Vector3(selected_pos) + Vector3(0.0, 0.0, 1.0), 10.0 * delta);
-	
-	if (Input.is_action_just_pressed("use_tool") and grid.can_set_cell(selected_pos, "wall")):
-		grid.set_cell(selected_pos, "wall");
+	if Input.is_action_just_pressed("use_tool"):
+		print("use")
