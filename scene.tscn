@@ -17,6 +17,7 @@ shader_parameter/albedo = ExtResource("1_m7jmp")
 shader_parameter/uv_scale = Vector2(13, 13)
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 1.0
 shader_parameter/exponent = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l71k7"]
@@ -51,6 +52,7 @@ shader_parameter/albedo = ExtResource("4_u3cyc")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 1.0
 shader_parameter/exponent = 10.0
 
 [node name="Root" type="Node3D" unique_id=1235117097]
