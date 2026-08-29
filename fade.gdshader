@@ -3,7 +3,8 @@ render_mode unshaded, blend_mix;
 
 uniform sampler2D depth_texture : hint_depth_texture, filter_nearest;
 
-uniform float density_multiplier : hint_range(0.0, 10.0) = 1.0;
+uniform float x_len : hint_range(0.0, 10.0) = 1.0;
+uniform float exponent : hint_range(0.0, 10.0) = 1.0;
 
 varying vec3 pos_object;
 varying vec3 cam_pos_object;
@@ -35,5 +36,5 @@ void fragment() {
 	vec3 position = pos_object + cam_dir_object * offset_into_fragment;
 	
     ALBEDO = vec3(0., 0., 0.);
-	ALPHA = clamp(position.x * density_multiplier, 0., 1.);
+	ALPHA = pow(smoothstep(-x_len / 2., x_len / 2., position.x), exponent);
 }

@@ -43,12 +43,13 @@ albedo_color = Color(0, 0.5647059, 0.90588236, 0.2784314)
 albedo_texture = ExtResource("4_u3cyc")
 
 [sub_resource type="BoxMesh" id="BoxMesh_x0ryr"]
-size = Vector3(4.805, 3.2172852, 26)
+size = Vector3(2, 1, 26)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oirwl"]
 render_priority = 0
 shader = ExtResource("6_y2354")
-shader_parameter/density_multiplier = 1.0000000475
+shader_parameter/x_len = 2.000000095
+shader_parameter/exponent = 0.50000002375
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
@@ -101,7 +102,22 @@ surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 mesh = ExtResource("4_m7jmp")
 surface_material_override/0 = SubResource("StandardMaterial3D_y2354")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=655949727]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1.1086426, 0)
+[node name="Fade1" type="MeshInstance3D" parent="." unique_id=655949727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, 0)
+mesh = SubResource("BoxMesh_x0ryr")
+surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
+
+[node name="Fade2" type="MeshInstance3D" parent="." unique_id=2121137371]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, 12)
+mesh = SubResource("BoxMesh_x0ryr")
+surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
+
+[node name="Fade3" type="MeshInstance3D" parent="." unique_id=950822030]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12, 0.5, 0)
+mesh = SubResource("BoxMesh_x0ryr")
+surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
+
+[node name="Fade4" type="MeshInstance3D" parent="." unique_id=655652532]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, 0, 0.5, -12)
 mesh = SubResource("BoxMesh_x0ryr")
 surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
