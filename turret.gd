@@ -33,6 +33,7 @@ func _process(delta: float) -> void:
 	
 	# turret animation
 	$TurretHead/TurretBarrel.scale = lerp($TurretHead/TurretBarrel.scale, Vector3.ONE, 5.0 * delta);
+	$TurretHead/TurretBarrel/TurretMuzzleFlash.scale = lerp($TurretHead/TurretBarrel/TurretMuzzleFlash.scale, Vector3.ZERO, 12.0 * delta);
 	
 	if target:
 	
@@ -43,6 +44,7 @@ func _process(delta: float) -> void:
 			
 			fire_cooldown = 1.0;
 			$TurretHead/TurretBarrel.scale = Vector3(1.2, 1.2, 0.7);
+			$TurretHead/TurretBarrel/TurretMuzzleFlash.scale = Vector3(1.5, 1.5, 2.5);
 			target.attack(damage);
 	
 	else:

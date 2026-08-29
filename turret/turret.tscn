@@ -5,6 +5,19 @@
 [ext_resource type="ArrayMesh" uid="uid://bbfmffnqawaxr" path="res://turret/turret_head.obj" id="3_mhatg"]
 [ext_resource type="ArrayMesh" uid="uid://ck8wd4jj54rim" path="res://turret/turret_barrel.obj" id="4_vt3mo"]
 [ext_resource type="Texture2D" uid="uid://c64dvti0otlrp" path="res://radius.png" id="5_7gi6x"]
+[ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://turret/turret_muzzle_flash.obj" id="5_rykjw"]
+[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_2o8hy"]
+[ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://turret/muzzle_flash.png" id="7_v66sf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rfjx"]
+render_priority = 0
+shader = ExtResource("6_2o8hy")
+shader_parameter/albedo = ExtResource("7_v66sf")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 0.2
+shader_parameter/exponent = 10.0
 
 [node name="Turret" type="Node3D" unique_id=1625817297]
 script = ExtResource("1_coqkk")
@@ -19,6 +32,11 @@ mesh = ExtResource("3_mhatg")
 [node name="TurretBarrel" type="MeshInstance3D" parent="TurretHead" unique_id=569734477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22995989, 0)
 mesh = ExtResource("4_vt3mo")
+
+[node name="TurretMuzzleFlash" type="MeshInstance3D" parent="TurretHead/TurretBarrel" unique_id=2026340139]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.3825801)
+mesh = ExtResource("5_rykjw")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
 
 [node name="Radius" type="Decal" parent="." unique_id=467498380]
 size = Vector3(3, 2, 3)

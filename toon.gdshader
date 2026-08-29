@@ -18,6 +18,11 @@ void vertex() {
 
 void fragment() {
 	
+	vec4 sample = texture(albedo, UV * uv_scale);
+	
+	if (sample.a < 0.5)
+		discard;
+	
 	float x = abs(world_pos.x);
 	float z = abs(world_pos.z);
 	float corner_dist = origin_fade_dist - fade_corner_radius;
@@ -35,5 +40,5 @@ void fragment() {
 	
 	float fade_fac = pow(smoothstep(origin_fade_dist - origin_fade_width2, origin_fade_dist + origin_fade_width2, dist), exponent);
 	
-    ALBEDO = mix(texture(albedo, UV * uv_scale).rgb, vec3(0.), fade_fac);
+    ALBEDO = mix(sample.rgb, vec3(0.), fade_fac);
 }
