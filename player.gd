@@ -6,15 +6,15 @@ const turret_prefab = preload("res://turret/turret.tscn");
 @export var PAN_SPEED_MULT := 0.8;
 @export var PAN_SPEED_SLOW_MULT := 0.4;
 
-var velocity : Vector3;
-
 var grid : GridMap;
 var enemy_path : Path3D;
+var turret_parent : Node3D;
 
 func _ready() -> void:
 	
 	grid = get_parent();
 	enemy_path = grid.get_node("EnemyPath");
+	turret_parent = grid.get_node("TurretParent");
 
 func _process(delta: float) -> void:
 	
@@ -22,23 +22,22 @@ func _process(delta: float) -> void:
 	var camalt := Input.get_axis("camalt_negative", "camalt_positive");
 	var pan := Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down");
 	
+	var velocity : Vector3;
+	
 	if (Input.is_action_pressed("modify_action")):
-		
 		$CameraAnchor/Camera.size = clamp($CameraAnchor/Camera.size + camalt * ZOOM_SPEED * delta, 6.0, 20.0);
-		
-		if (pan):
-			velocity = $CameraAnchor.global_basis * Vector3(pan.x, 0, pan.y) * $CameraAnchor/Camera.size * PAN_SPEED_SLOW_MULT;
-		else:
-			velocity = lerp(velocity, Vector3.ZERO, 10.0 * delta);
-		
+		velocity = $CameraAnchor.global_basis * Vector3(pan.x, 0, pan.y) * $CameraAnchor/Camera.size * PAN_SPEED_SLOW_MULT;
 	else:
-		
 		$CameraAnchor.global_rotation.y += camalt * delta;
-		
-		if (pan):
-			velocity = $CameraAnchor.global_basis * Vector3(pan.x, 0, pan.y) * $CameraAnchor/Camera.size * PAN_SPEED_MULT;
-		else:
-			velocity = lerp(velocity, Vector3.ZERO, 10.0 * delta);
+		velocity = $CameraAnchor.global_basis * Vector3(pan.x, 0, pan.y) * $CameraAnchor/Camera.size * PAN_SPEED_MULT;
+
+	# center on tile if not actively moving
+	if not pan:
+		velocity = Vector3(
+			0.5 - fposmod(global_position.x, 1.0),
+			0.0,
+			0.5 - fposmod(global_position.z, 1.0)
+		) * 200 * delta;
 
 	# update player position (cursor lags behind and is moved separately)
 	var prev_position = global_position;
@@ -54,12 +53,12 @@ func _process(delta: float) -> void:
 	
 	$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5) if pos_invalid else Color(0.1, 0.6, 1.0, 0.5);
 	
-	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 10.0 * delta);
+	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 15.0 * delta);
 	
 	if Input.is_action_just_pressed("use_tool") and not pos_invalid:
 		
 		var turret = turret_prefab.instantiate();
 		
-		grid.add_child(turret);
+		turret_parent.add_child(turret);
 		turret.enemy_path = enemy_path;
 		turret.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);

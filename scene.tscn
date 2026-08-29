@@ -143,3 +143,5 @@ script = ExtResource("7_ni31j")
 [node name="Mesh" type="MeshInstance3D" parent="GridMap/EnemyPath/Enemy" unique_id=1995363100]
 mesh = SubResource("BoxMesh_x0ryr")
 surface_material_override/0 = SubResource("ShaderMaterial_ni31j")
+
+[node name="TurretParent" type="Node3D" parent="GridMap" unique_id=57393167]
