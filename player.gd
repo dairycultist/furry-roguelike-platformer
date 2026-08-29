@@ -35,19 +35,21 @@ func _process(delta: float) -> void:
 		else:
 			velocity = lerp(velocity, Vector3.ZERO, 10.0 * delta);
 
+	var prev_position = global_position;
+
 	global_position += velocity * delta;
-	$Corner0.global_position -= velocity * delta;
-	$Corner1.global_position -= velocity * delta;
-	$Corner2.global_position -= velocity * delta;
-	$Corner3.global_position -= velocity * delta;
+	
+	global_position = global_position.clamp(Vector3(-13, 0, -13), Vector3(12, 0, 12));
+	
+	$Cursor.global_position -= global_position - prev_position;
 	
 	# selection
 	var selected_pos : Vector3i = Vector3i(global_position);
+	var pos_invalid : bool = grid.get_cell_item(selected_pos) >= 0;
 	
-	$Corner0.global_position = lerp($Corner0.global_position, Vector3(selected_pos), 10.0 * delta);
-	$Corner1.global_position = lerp($Corner1.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 0.0), 10.0 * delta);
-	$Corner2.global_position = lerp($Corner2.global_position, Vector3(selected_pos) + Vector3(1.0, 0.0, 1.0), 10.0 * delta);
-	$Corner3.global_position = lerp($Corner3.global_position, Vector3(selected_pos) + Vector3(0.0, 0.0, 1.0), 10.0 * delta);
+	$Cursor.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5) if pos_invalid else Color(0.1, 0.6, 1.0, 0.5);
+	
+	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 10.0 * delta);
 	
 	if Input.is_action_just_pressed("use_tool"):
 		print(grid.get_cell_item(selected_pos));
