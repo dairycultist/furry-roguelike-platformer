@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 	var selected_pos : Vector3i = Vector3i(global_position);
 	var pos_invalid : bool = grid.get_cell_item(selected_pos) >= 0;
 	
-	$Cursor.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5) if pos_invalid else Color(0.1, 0.6, 1.0, 0.5);
+	$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5) if pos_invalid else Color(0.1, 0.6, 1.0, 0.5);
 	
 	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 10.0 * delta);
 	

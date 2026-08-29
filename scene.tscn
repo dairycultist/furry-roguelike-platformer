@@ -1,18 +1,23 @@
 [gd_scene format=3 uid="uid://d3tflhq8vgolo"]
 
 [ext_resource type="Texture2D" uid="uid://xhb4a20u8dfe" path="res://grass.png" id="1_m7jmp"]
+[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="1_y2354"]
 [ext_resource type="Script" uid="uid://btguypw88w8b6" path="res://player.gd" id="2_nxogm"]
 [ext_resource type="Script" uid="uid://btc3b8xr27eyr" path="res://grid_map.gd" id="3_3253y"]
 [ext_resource type="ArrayMesh" uid="uid://chrc7hrfxtyul" path="res://path.obj" id="4_m7jmp"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
-[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://fade.gdshader" id="6_y2354"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(26, 26)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7jmp"]
-albedo_texture = ExtResource("1_m7jmp")
-uv1_scale = Vector3(13, 13, 13)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7jmp"]
+render_priority = 0
+shader = ExtResource("1_y2354")
+shader_parameter/albedo = ExtResource("1_m7jmp")
+shader_parameter/uv_scale = Vector2(13, 13)
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/exponent = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l71k7"]
 transparency = 4
@@ -39,17 +44,14 @@ background_mode = 1
 transparency = 4
 albedo_color = Color(0, 0.5647059, 0.90588236, 0.2784314)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2354"]
-albedo_texture = ExtResource("4_u3cyc")
-
-[sub_resource type="BoxMesh" id="BoxMesh_x0ryr"]
-size = Vector3(2, 1, 26)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oirwl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2354"]
 render_priority = 0
-shader = ExtResource("6_y2354")
-shader_parameter/x_len = 2.000000095
-shader_parameter/exponent = 0.50000002375
+shader = ExtResource("1_y2354")
+shader_parameter/albedo = ExtResource("4_u3cyc")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/exponent = 10.0
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
@@ -59,7 +61,7 @@ light_specular = 0.0
 
 [node name="GroundMesh" type="MeshInstance3D" parent="." unique_id=421907200]
 mesh = SubResource("PlaneMesh_lxpj2")
-surface_material_override/0 = SubResource("StandardMaterial3D_m7jmp")
+surface_material_override/0 = SubResource("ShaderMaterial_m7jmp")
 
 [node name="Label" type="Label" parent="." unique_id=16969720]
 anchors_preset = 2
@@ -94,30 +96,13 @@ environment = SubResource("Environment_m7jmp")
 projection = 1
 size = 12.0
 
-[node name="Cursor" type="MeshInstance3D" parent="GridMap/Player" unique_id=1053171651]
+[node name="Cursor" type="Node3D" parent="GridMap/Player" unique_id=1495270331]
+
+[node name="Mesh" type="MeshInstance3D" parent="GridMap/Player/Cursor" unique_id=1053171651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 
 [node name="Path" type="MeshInstance3D" parent="." unique_id=832493960]
 mesh = ExtResource("4_m7jmp")
-surface_material_override/0 = SubResource("StandardMaterial3D_y2354")
-
-[node name="Fade1" type="MeshInstance3D" parent="." unique_id=655949727]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, 0)
-mesh = SubResource("BoxMesh_x0ryr")
-surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
-
-[node name="Fade2" type="MeshInstance3D" parent="." unique_id=2121137371]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, 12)
-mesh = SubResource("BoxMesh_x0ryr")
-surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
-
-[node name="Fade3" type="MeshInstance3D" parent="." unique_id=950822030]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12, 0.5, 0)
-mesh = SubResource("BoxMesh_x0ryr")
-surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
-
-[node name="Fade4" type="MeshInstance3D" parent="." unique_id=655652532]
-transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, 0, 0.5, -12)
-mesh = SubResource("BoxMesh_x0ryr")
-surface_material_override/0 = SubResource("ShaderMaterial_oirwl")
+surface_material_override/0 = SubResource("ShaderMaterial_y2354")
