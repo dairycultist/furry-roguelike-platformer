@@ -17,7 +17,7 @@ shader_parameter/albedo = ExtResource("1_m7jmp")
 shader_parameter/uv_scale = Vector2(13, 13)
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
-shader_parameter/fade_corner_radius = 1.0
+shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l71k7"]
@@ -52,8 +52,15 @@ shader_parameter/albedo = ExtResource("4_u3cyc")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
-shader_parameter/fade_corner_radius = 1.0
+shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
+
+[sub_resource type="Curve3D" id="Curve3D_y2354"]
+_data = {
+"points": PackedVector3Array(-3.1385918, 0, 3.190049, 3.1385918, 0, -3.190049, -13.951372, 0, 5.6567516, -1.5534091, 0, 0.058619022, 1.5534091, 0, -0.058619022, -8.0869875, 0, 3.0528953, -3.546462, 0, -0.17585754, 3.546462, 0, 0.17585754, 0.8817517, 0, 8.416552, 0.02930832, 0, 1.1137643, -0.02930832, 0, -1.1137643, 4.7506194, 0, 4.401137, 2.1102924, 0, 0.35171527, -2.1102924, 0, -0.35171527, 1.7317274, 0, 0.854675, 1.3775504, 0, 3.0188885, -1.3775504, 0, -3.0188885, -4.8336215, 0, -1.3435442, -1.4361696, 0, -0.3810253, 1.4361696, 0, 0.3810253, -1.3164694, 0, -5.2710304, -1.6413381, 0, -0.26378655, 1.6413381, 0, 0.26378655, 5.131643, 0, -1.6659501, -0.8499799, 0, 2.22753, 0.8499799, 0, -2.22753, 8.707415, 0, -4.0107183, 0.78, 0, 0, 0, 0, 0, 4.3109717, 0, -13.301861),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
@@ -62,6 +69,7 @@ transform = Transform3D(0.8089059, 0.48318726, -0.33496475, 0, 0.56972784, 0.821
 light_specular = 0.0
 
 [node name="GroundMesh" type="MeshInstance3D" parent="." unique_id=421907200]
+visible = false
 mesh = SubResource("PlaneMesh_lxpj2")
 surface_material_override/0 = SubResource("ShaderMaterial_m7jmp")
 
@@ -79,6 +87,7 @@ Shift + Arrow keys - Pan slowly"
 vertical_alignment = 2
 
 [node name="GridMap" type="GridMap" parent="." unique_id=269219875]
+visible = false
 mesh_library = SubResource("MeshLibrary_lxpj2")
 cell_size = Vector3(1, 1, 1)
 data = {
@@ -106,5 +115,9 @@ mesh = SubResource("BoxMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 
 [node name="Path" type="MeshInstance3D" parent="." unique_id=832493960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 mesh = ExtResource("4_m7jmp")
 surface_material_override/0 = SubResource("ShaderMaterial_y2354")
+
+[node name="Path3D" type="Path3D" parent="." unique_id=320968486]
+curve = SubResource("Curve3D_y2354")
