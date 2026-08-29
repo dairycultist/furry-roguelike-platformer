@@ -84,10 +84,12 @@ transform = Transform3D(0.8089059, 0.48318726, -0.33496475, 0, 0.56972784, 0.821
 light_specular = 0.0
 
 [node name="GroundMesh" type="MeshInstance3D" parent="." unique_id=421907200]
+layers = 3
 mesh = SubResource("PlaneMesh_lxpj2")
 surface_material_override/0 = SubResource("ShaderMaterial_m7jmp")
 
 [node name="PathMesh" type="MeshInstance3D" parent="." unique_id=832493960]
+layers = 3
 mesh = ExtResource("4_m7jmp")
 surface_material_override/0 = SubResource("ShaderMaterial_y2354")
 
