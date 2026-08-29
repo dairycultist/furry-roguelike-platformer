@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 	$Cursor.global_position -= global_position - prev_position;
 	
 	# selection
-	var selected_pos : Vector3i = Vector3i(global_position);
+	var selected_pos : Vector3i = Vector3i(global_position.ceil()) - Vector3i(1, 0, 1);
 	var pos_invalid : bool = grid.get_cell_item(selected_pos) >= 0;
 	
 	$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5) if pos_invalid else Color(0.1, 0.6, 1.0, 0.5);
@@ -62,4 +62,4 @@ func _process(delta: float) -> void:
 		
 		grid.add_child(turret);
 		turret.enemy_path = enemy_path;
-		turret.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);
+		turret.global_position = Vector3(selected_pos.x - 0.5, 0.0, selected_pos.z + 0.5);
