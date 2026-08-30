@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 		
 		if towers_by_position.has(selected_pos):
 			
-			var selected_tower : Node3D = towers_by_position[selected_pos];
+			var selected_tower : Tower = towers_by_position[selected_pos];
 			
 			selected_tower.poke();
 			
@@ -83,27 +83,36 @@ func _process(delta: float) -> void:
 			
 			# TODO towers should be able to report an array of what
 			# towers they can upgrade to
-			run_tower_placement_options(selected_pos, false, []);
+			run_tower_placement_options(selected_pos, selected_tower, []);
 			
 		else:
 			$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5);
-			run_tower_placement_options(selected_pos, true, []);
+			run_tower_placement_options(selected_pos, null, []);
 	else:
 		$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(0.1, 0.6, 1.0, 0.5);
-		run_tower_placement_options(selected_pos, true, [cannon_example, sniper_example, omnigun_example, mortar_example]);
+		run_tower_placement_options(selected_pos, null, [cannon_example, sniper_example, omnigun_example, mortar_example]);
 	
 	# move cursor to selection
 	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 15.0 * delta);
 
-func run_tower_placement_options(selected_pos : Vector3i, place_otherwise_upgrade : bool, options : Array[Tower]):
+func run_tower_placement_options(selected_pos : Vector3i, selected_tower : Tower, options : Array[Tower]):
 	
 	$InfoBox/TowerTypeLabel.text = "";
 	
 	for i in range(0, options.size()):
-		$InfoBox/TowerTypeLabel.text += str("[color=white]" if options[i].cost <= money else "[color=gray]", i + 1, " - Place " if place_otherwise_upgrade else " - Upgrade to ", options[i].title, " ($", options[i].cost, ")", "[/color]", "\n");
+		$InfoBox/TowerTypeLabel.text += str("[color=white]" if options[i].cost <= money else "[color=gray]", i + 1, " - Upgrade to " if selected_tower else " - Place ", options[i].title, " ($", options[i].cost, ")", "[/color]", "\n");
 	
-	if not place_otherwise_upgrade:
-		$InfoBox/TowerTypeLabel.text += str(4, " - Destroy (no workie)\n");
+	if selected_tower:
+		
+		$InfoBox/TowerTypeLabel.text += str(4, " - Sell ($", selected_tower.sell_value, ")\n");
+		
+		if Input.is_action_just_pressed("tool_4"):
+			
+			# sell it
+			money += selected_tower.sell_value;
+			grid.set_cell_item(selected_pos, -1);
+			towers_by_position[selected_pos] = null;
+			selected_tower.queue_free();
 
 	# placing tower
 	if Input.is_action_just_pressed("tool_any"):

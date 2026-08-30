@@ -4,6 +4,7 @@ class_name Tower;
 
 @export var title : String = "Unnamed Tower";
 @export var cost : int = 0;
+@export var sell_value : int = 0;
 
 @export var damage : int = 1;
 @export var max_targeting_distance : int = 3;

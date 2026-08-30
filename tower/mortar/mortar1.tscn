@@ -24,6 +24,7 @@ shader_parameter/exponent = 10.0
 script = ExtResource("1_hlpm8")
 title = "Mortar"
 cost = 225
+sell_value = 100
 max_targeting_distance = 7
 long_range_only = true
 

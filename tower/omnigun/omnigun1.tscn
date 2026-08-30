@@ -24,6 +24,7 @@ shader_parameter/exponent = 10.0
 script = ExtResource("1_jqjya")
 title = "Omnigun"
 cost = 150
+sell_value = 75
 override_targeting_animation = true
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
