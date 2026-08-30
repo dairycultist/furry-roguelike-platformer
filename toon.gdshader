@@ -4,6 +4,8 @@ render_mode unshaded, blend_mix;
 uniform sampler2D albedo : source_color;
 uniform vec2 uv_scale = vec2(1., 1.);
 
+uniform float hit_fac = 1.0; // 0.0 is "hit just started"
+
 uniform float origin_fade_dist = 10.0;
 uniform float origin_fade_width2 = 1.0;
 uniform float fade_corner_radius = 1.0;
@@ -30,15 +32,15 @@ void fragment() {
 	float dist;
 	
 	if (x > corner_dist && z > corner_dist) {
-		
 		dist = corner_dist + distance(vec2(corner_dist, corner_dist), vec2(x, z));
-		
 	} else {
-		
 		dist = max(x, z);
 	}
 	
 	float fade_fac = pow(smoothstep(origin_fade_dist - origin_fade_width2, origin_fade_dist + origin_fade_width2, dist), exponent);
 	
-    ALBEDO = mix(sample.rgb, vec3(0.), fade_fac);
+	if (fade_fac == 1.0)
+		discard;
+	
+    ALBEDO = mix(vec3(1.0), mix(sample.rgb, vec3(0.), fade_fac), pow(hit_fac, 0.2));
 }

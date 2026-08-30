@@ -11,6 +11,7 @@ render_priority = 0
 shader = ExtResource("2_iifgy")
 shader_parameter/albedo = ExtResource("3_epg4t")
 shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/hit_fac = 0.0
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
@@ -19,7 +20,6 @@ shader_parameter/exponent = 10.0
 [node name="Enemy" type="PathFollow3D" unique_id=1505863252]
 transform = Transform3D(0.9999751, 0, 0, 0, 1.0000056, 0, 0, 0, 0.9999751, 0, 0, 0)
 script = ExtResource("1_qi2p4")
-speed = 1.0
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1535816302]
 mesh = SubResource("BoxMesh_x0ryr")

@@ -109,4 +109,4 @@ func set_tower_types_displayed(place_otherwise_upgrade : bool, types : Array[Str
 	else:
 		for i in range(0, types.size()):
 			$TowerTypeLabel.text += str(i + 1, " - Upgrade to ", types[i], "\n");
-		$TowerTypeLabel.text += str(4, " - Destroy\n");
+		$TowerTypeLabel.text += str(4, " - Destroy (no workie)\n");
