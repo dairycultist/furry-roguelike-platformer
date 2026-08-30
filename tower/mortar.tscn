@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c36jpx8yo5e1o"]
+
+[ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://turret.gd" id="1_aa4nq"]
+[ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_edw4o"]
+[ext_resource type="ArrayMesh" uid="uid://38iu0jyphmiw" path="res://tower/mortar_head.obj" id="3_aa4nq"]
+[ext_resource type="ArrayMesh" uid="uid://dn4u3hpw5cey8" path="res://tower/mortar_barrel.obj" id="4_edw4o"]
+[ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_nqktt"]
+[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_pa1ad"]
+[ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_h3smt"]
+[ext_resource type="Texture2D" uid="uid://c64dvti0otlrp" path="res://radius.png" id="8_alukg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rfjx"]
+render_priority = 0
+shader = ExtResource("6_pa1ad")
+shader_parameter/albedo = ExtResource("7_h3smt")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 0.2
+shader_parameter/exponent = 10.0
+
+[node name="Turret" type="Node3D" unique_id=1625817297]
+script = ExtResource("1_aa4nq")
+
+[node name="TurretBase" type="MeshInstance3D" parent="." unique_id=798336857]
+mesh = ExtResource("2_edw4o")
+
+[node name="TurretHead" type="MeshInstance3D" parent="." unique_id=823903376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = ExtResource("3_aa4nq")
+
+[node name="TurretBarrel" type="MeshInstance3D" parent="TurretHead" unique_id=569734477]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0.15, 0.2)
+mesh = ExtResource("4_edw4o")
+
+[node name="TurretMuzzleFlash" type="MeshInstance3D" parent="TurretHead/TurretBarrel" unique_id=2026340139]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.3825801)
+mesh = ExtResource("5_nqktt")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Radius" type="Decal" parent="." unique_id=467498380]
+size = Vector3(3, 2, 3)
+texture_albedo = ExtResource("8_alukg")
+albedo_mix = 0.3
+upper_fade = 1e-05
+lower_fade = 1e-05
+cull_mask = 2
