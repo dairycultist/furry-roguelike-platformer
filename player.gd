@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 			
 		else:
 			$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5);
-			set_tower_types_displayed(false, []);
+			set_tower_types_displayed(true, []);
 	else:
 		$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(0.1, 0.6, 1.0, 0.5);
 		set_tower_types_displayed(true, ["Cannon", "Sniper", "Omnigun", "Mortar"]);

@@ -18,5 +18,20 @@ four base tower types
 - mortar (long range AOE)
   - upgrades to get a gets a rocket
 
-the fun of tower defense is in the breadth of choices, so distinct upgrade paths are a must, making
-sure that there are synergies and no one best strategy/playstyle
+the fun of tower defense is in the breadth of choices, so distinct upgrade paths
+are a must, making sure that there are synergies and no one best strategy/playstyle.
+do you choose to upgrade your cannon or buy an omnigun :think:
+
+```
+Welcome to the field, buster!
+Er, you ARE one of them new trainees, I gather?
+
+> No, I know how to play already.
+
+Well excuse me, general! I'll leave you to it, then.
+
+> Yes, give me the tutorial.
+
+Alrighty!
+The name's Betty, I'll be your instructor for today.
+```
