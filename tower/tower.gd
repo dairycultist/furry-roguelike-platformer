@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		var dist = Vector3(enemy.global_position.x, 0.0, enemy.global_position.z).distance_to(global_position);
 		
 		if dist <= max_targeting_distance + 0.5 and (not long_range_only or dist >= (max_targeting_distance + 0.5) / 2.0):
-			in_range.push_front(enemy);
+			in_range.push_back(enemy);
 	
 	# do stuff with targets
 	if not in_range.is_empty():
@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 		if (fire_cooldown < 0.0):
 			fire_cooldown = 1.0;
 			for enemy in pick_targets_to_attack(in_range):
-				enemy.attack(damage);
+				enemy.attack(damage, global_position);
 	else:
 		$Head.global_rotation.y += 0.5 * delta;
 

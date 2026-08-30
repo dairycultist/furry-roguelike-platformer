@@ -5,6 +5,10 @@ var sniper_example : Tower;
 var omnigun_example : Tower;
 var mortar_example : Tower;
 
+@export var grid : GridMap;
+@export var enemy_path : Path3D;
+@export var tower_parent : Node3D;
+
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;
 @export var PAN_SPEED_SLOW_MULT := 0.4;
@@ -13,10 +17,6 @@ var money : int:
 	set(value):
 		money = value;
 		$InfoBox/MoneyLabel.text = str("$", money);
-
-var grid : GridMap;
-var enemy_path : Path3D;
-var tower_parent : Node3D;
 
 var towers_by_position = {};
 
@@ -35,10 +35,6 @@ func _ready() -> void:
 	mortar_example.process_mode = Node.PROCESS_MODE_DISABLED;
 	
 	money = 50;
-	
-	grid = get_parent();
-	enemy_path = grid.get_node("EnemyPath");
-	tower_parent = grid.get_node("TowerParent");
 
 func _process(delta: float) -> void:
 	

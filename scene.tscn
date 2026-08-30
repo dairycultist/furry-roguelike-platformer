@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://btc3b8xr27eyr" path="res://grid_map.gd" id="3_3253y"]
 [ext_resource type="ArrayMesh" uid="uid://chrc7hrfxtyul" path="res://path.obj" id="4_m7jmp"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
-[ext_resource type="PackedScene" uid="uid://cb5sx04t1xbpo" path="res://enemy.tscn" id="7_ni31j"]
 [ext_resource type="Script" uid="uid://baf7a64j7ehvq" path="res://enemy_path.gd" id="7_xlvrw"]
+[ext_resource type="Script" uid="uid://bk0lb4qx4f065" path="res://wave_orchestrator.gd" id="9_73fnb"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(26, 26)
@@ -34,6 +34,23 @@ shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
 
+[sub_resource type="Curve3D" id="Curve3D_y2354"]
+_data = {
+"points": PackedVector3Array(-3.3144503, 0, 2.867643, 3.3144503, 0, -2.867643, -13.951372, 0, 5.6567516, -2.0853896, 0, -0.06837368, 2.0853896, 0, 0.06837368, -8.077627, 0, 3.1005878, -3.0084305, 0, 0.44442654, 3.0084305, 0, -0.44442654, 1.0502259, 0, 8.433718, -0.04241371, 0, 1.5027637, 0.04241371, 0, -1.5027637, 4.7082057, 0, 4.775739, 2.1102924, 0, 0.35171527, -2.1102924, 0, -0.35171527, 1.4262825, 0, 0.9126392, 1.3775504, 0, 3.0188885, -1.3775504, 0, -3.0188885, -4.7456927, 0, -1.3728538, -1.4361696, 0, -0.3810253, 1.4361696, 0, 0.3810253, -1.2578499, 0, -5.095173, -0.94403267, 0, 0.019602299, 0.94403267, 0, -0.019602299, 5.131643, 0, -1.6659501, -0.4444294, 0, 3.0426183, 0.4444294, 0, -3.0426183, 8.844799, 0, -4.52305, 0.51280403, 0, 0.4444275, -0.51280403, 0, -0.4444275, 3.3065505, 0, -14.403013),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="Environment" id="Environment_m7jmp"]
+background_mode = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_lxpj2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u3cyc"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(0, 0.5647059, 0.90588236, 0.2784314)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l71k7"]
 transparency = 4
 albedo_color = Color(0.49803922, 0.65882355, 1, 0.27058825)
@@ -49,23 +66,6 @@ item/0/mesh_cast_shadow = 1
 item/0/shapes = []
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
-
-[sub_resource type="Environment" id="Environment_m7jmp"]
-background_mode = 1
-
-[sub_resource type="BoxMesh" id="BoxMesh_lxpj2"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u3cyc"]
-transparency = 4
-shading_mode = 0
-albedo_color = Color(0, 0.5647059, 0.90588236, 0.2784314)
-
-[sub_resource type="Curve3D" id="Curve3D_y2354"]
-_data = {
-"points": PackedVector3Array(-3.3144503, 0, 2.867643, 3.3144503, 0, -2.867643, -13.951372, 0, 5.6567516, -2.0853896, 0, -0.06837368, 2.0853896, 0, 0.06837368, -8.077627, 0, 3.1005878, -3.0084305, 0, 0.44442654, 3.0084305, 0, -0.44442654, 1.0502259, 0, 8.433718, -0.04241371, 0, 1.5027637, 0.04241371, 0, -1.5027637, 4.7082057, 0, 4.775739, 2.1102924, 0, 0.35171527, -2.1102924, 0, -0.35171527, 1.4262825, 0, 0.9126392, 1.3775504, 0, 3.0188885, -1.3775504, 0, -3.0188885, -4.7456927, 0, -1.3728538, -1.4361696, 0, -0.3810253, 1.4361696, 0, 0.3810253, -1.2578499, 0, -5.095173, -0.94403267, 0, 0.019602299, 0.94403267, 0, -0.019602299, 5.131643, 0, -1.6659501, -0.4444294, 0, 3.0426183, 0.4444294, 0, -3.0426183, 8.844799, 0, -4.52305, 0.51280403, 0, 0.4444275, -0.51280403, 0, -0.4444275, 3.3065505, 0, -14.403013),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 10
 
 [node name="Root" type="Node3D" unique_id=1235117097]
 
@@ -83,34 +83,63 @@ layers = 3
 mesh = ExtResource("4_m7jmp")
 surface_material_override/0 = SubResource("ShaderMaterial_y2354")
 
-[node name="GridMap" type="GridMap" parent="." unique_id=269219875]
-mesh_library = SubResource("MeshLibrary_lxpj2")
-cell_size = Vector3(1, 1, 1)
-data = {
-"cells": PackedInt32Array(65523, 5, 0, 65523, 4, 0, 65524, 4, 0, 65524, 3, 0, 65523, 3, 0, 65524, 2, 0, 65525, 2, 0, 65526, 2, 0, 65527, 2, 0, 65528, 2, 0, 65525, 4, 0, 65525, 3, 0, 65526, 3, 0, 65527, 3, 0, 65528, 3, 0, 65529, 2, 0, 65529, 3, 0, 65530, 3, 0, 65530, 4, 0, 65529, 4, 0, 65528, 4, 0, 65530, 5, 0, 65531, 5, 0, 65531, 6, 0, 65532, 7, 0, 65533, 8, 0, 65534, 8, 0, 65535, 9, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 8, 0, 2, 8, 0, 4, 7, 0, 5, 6, 0, 5, 5, 0, 5, 4, 0, 5, 3, 0, 5, 2, 0, 4, 1, 0, 3, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 0, 65534, 65535, 0, 65533, 65535, 0, 65532, 65535, 0, 65532, 65534, 0, 65531, 65534, 0, 65531, 65533, 0, 65531, 65532, 0, 65532, 65532, 0, 65532, 65531, 0, 65533, 65531, 0, 65534, 65531, 0, 65535, 65532, 0, 0, 65532, 0, 1, 65532, 0, 1, 65533, 0, 2, 65533, 0, 2, 65534, 0, 3, 65534, 0, 4, 65535, 0, 5, 65535, 0, 6, 65535, 0, 7, 65534, 0, 8, 65534, 0, 9, 65533, 0, 9, 65532, 0, 9, 65531, 0, 9, 65530, 0, 9, 65529, 0, 9, 65528, 0, 8, 65527, 0, 8, 65526, 0, 7, 65525, 0, 6, 65524, 0, 6, 65523, 0, 5, 65523, 0, 4, 65523, 0, 3, 65523, 0, 4, 65524, 0, 5, 65524, 0, 5, 65525, 0, 6, 65525, 0, 6, 65526, 0, 7, 65526, 0, 6, 65527, 0, 7, 65527, 0, 7, 65528, 0, 8, 65528, 0, 7, 65529, 0, 8, 65529, 0, 8, 65530, 0, 8, 65531, 0, 8, 65532, 0, 7, 65532, 0, 7, 65533, 0, 8, 65533, 0, 6, 65533, 0, 5, 65533, 0, 4, 65533, 0, 4, 65534, 0, 5, 65534, 0, 6, 65534, 0, 3, 65533, 0, 3, 65532, 0, 2, 65532, 0, 2, 65531, 0, 1, 65531, 0, 0, 65531, 0, 0, 65530, 0, 65535, 65530, 0, 65535, 65531, 0, 65534, 65530, 0, 65533, 65530, 0, 65532, 65530, 0, 65531, 65531, 0, 65531, 65530, 0, 65530, 65531, 0, 65530, 65532, 0, 65530, 65533, 0, 65530, 65534, 0, 65530, 65535, 0, 65531, 65535, 0, 65531, 0, 0, 65532, 0, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 3, 3, 0, 4, 3, 0, 4, 4, 0, 4, 5, 0, 3, 5, 0, 3, 6, 0, 4, 6, 0, 3, 7, 0, 2, 7, 0, 1, 7, 0, 1, 8, 0, 0, 8, 0, 65535, 8, 0, 65535, 7, 0, 0, 7, 0, 65534, 7, 0, 65533, 7, 0, 65534, 6, 0, 65533, 6, 0, 65532, 6, 0, 65532, 5, 0, 65531, 4, 0)
-}
-script = ExtResource("3_3253y")
-occupied_material = SubResource("StandardMaterial3D_l71k7")
+[node name="EnemyPath" type="Path3D" parent="." unique_id=320968486 node_paths=PackedStringArray("_player")]
+curve = SubResource("Curve3D_y2354")
+script = ExtResource("7_xlvrw")
+_player = NodePath("../Player")
 
-[node name="Player" type="Node3D" parent="GridMap" unique_id=945685676]
+[node name="TowerParent" type="Node3D" parent="." unique_id=57393167]
+
+[node name="WaveOrchestrator" type="Node3D" parent="." unique_id=906795223 node_paths=PackedStringArray("_enemy_path")]
+script = ExtResource("9_73fnb")
+_enemy_path = NodePath("../EnemyPath")
+
+[node name="WaveLabel" type="Label" parent="WaveOrchestrator" unique_id=712433658]
+offset_right = 98.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "Set up"
+
+[node name="StartWaveLabel" type="Label" parent="WaveOrchestrator" unique_id=626383820]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -158.0
+offset_right = 245.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 20
+text = "Press [space] to start next wave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" type="Node3D" parent="." unique_id=945685676 node_paths=PackedStringArray("grid", "enemy_path", "tower_parent")]
 script = ExtResource("2_nxogm")
+grid = NodePath("../GridMap")
+enemy_path = NodePath("../EnemyPath")
+tower_parent = NodePath("../TowerParent")
 
-[node name="CameraAnchor" type="Node3D" parent="GridMap/Player" unique_id=310821411]
+[node name="CameraAnchor" type="Node3D" parent="Player" unique_id=310821411]
 
-[node name="Camera" type="Camera3D" parent="GridMap/Player/CameraAnchor" unique_id=1150856261]
+[node name="Camera" type="Camera3D" parent="Player/CameraAnchor" unique_id=1150856261]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 9, 9)
 environment = SubResource("Environment_m7jmp")
 projection = 1
 size = 12.0
 
-[node name="Cursor" type="Node3D" parent="GridMap/Player" unique_id=1495270331]
+[node name="Cursor" type="Node3D" parent="Player" unique_id=1495270331]
 
-[node name="Mesh" type="MeshInstance3D" parent="GridMap/Player/Cursor" unique_id=1053171651]
+[node name="Mesh" type="MeshInstance3D" parent="Player/Cursor" unique_id=1053171651]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 
-[node name="InfoBox" type="Control" parent="GridMap/Player" unique_id=202553279]
+[node name="InfoBox" type="Control" parent="Player" unique_id=202553279]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -122,7 +151,7 @@ offset_top = -335.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="ColorRect" type="ColorRect" parent="GridMap/Player/InfoBox" unique_id=1140183359]
+[node name="ColorRect" type="ColorRect" parent="Player/InfoBox" unique_id=1140183359]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,7 +160,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.3137255)
 
-[node name="ControlsLabel" type="Label" parent="GridMap/Player/InfoBox" unique_id=16969720]
+[node name="ControlsLabel" type="Label" parent="Player/InfoBox" unique_id=16969720]
 layout_mode = 0
 offset_left = 7.0
 offset_top = 226.0
@@ -145,7 +174,7 @@ Arrow keys - Pan
 Shift + Arrow keys - Pan slowly"
 vertical_alignment = 2
 
-[node name="MoneyLabel" type="Label" parent="GridMap/Player/InfoBox" unique_id=1391859905]
+[node name="MoneyLabel" type="Label" parent="Player/InfoBox" unique_id=1391859905]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 10.0
@@ -155,7 +184,7 @@ theme_override_colors/font_color = Color(0.9696464, 0.94566506, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "$money"
 
-[node name="TowerTypeLabel" type="RichTextLabel" parent="GridMap/Player/InfoBox" unique_id=1011735510]
+[node name="TowerTypeLabel" type="RichTextLabel" parent="Player/InfoBox" unique_id=1011735510]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 48.0
@@ -164,24 +193,11 @@ offset_bottom = 240.0
 bbcode_enabled = true
 text = "info"
 
-[node name="EnemyPath" type="Path3D" parent="GridMap" unique_id=320968486 node_paths=PackedStringArray("_player")]
-curve = SubResource("Curve3D_y2354")
-script = ExtResource("7_xlvrw")
-_player = NodePath("../Player")
-
-[node name="Enemy1" parent="GridMap/EnemyPath" unique_id=1505863252 instance=ExtResource("7_ni31j")]
-transform = Transform3D(0.6542781, 0, -0.7562211, 0, 1.0000056, 0, 0.7562211, 0, 0.6542781, -13.951372, 0, 5.6567516)
-
-[node name="Enemy2" parent="GridMap/EnemyPath" unique_id=1208010311 instance=ExtResource("7_ni31j")]
-transform = Transform3D(0.605273, 0, -0.79598653, 0, 1.0000056, 0, 0.79598653, 0, 0.605273, -12.4058485, 0, 4.3869715)
-progress = 2.0
-
-[node name="Enemy3" parent="GridMap/EnemyPath" unique_id=630198422 instance=ExtResource("7_ni31j")]
-transform = Transform3D(0.38303873, 0, -0.92370534, 0, 1.0000056, 0, 0.92370534, 0, 0.38303873, -10.709441, 0, 3.3384016)
-progress = 4.0
-
-[node name="Enemy4" parent="GridMap/EnemyPath" unique_id=646834160 instance=ExtResource("7_ni31j")]
-transform = Transform3D(-0.036045827, 0, -0.9993252, 0, 1.0000056, 0, 0.9993252, 0, -0.036045827, -8.746054, 0, 3.0748296)
-progress = 6.0
-
-[node name="TowerParent" type="Node3D" parent="GridMap" unique_id=57393167]
+[node name="GridMap" type="GridMap" parent="." unique_id=269219875]
+mesh_library = SubResource("MeshLibrary_lxpj2")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(65523, 5, 0, 65523, 4, 0, 65524, 4, 0, 65524, 3, 0, 65523, 3, 0, 65524, 2, 0, 65525, 2, 0, 65526, 2, 0, 65527, 2, 0, 65528, 2, 0, 65525, 4, 0, 65525, 3, 0, 65526, 3, 0, 65527, 3, 0, 65528, 3, 0, 65529, 2, 0, 65529, 3, 0, 65530, 3, 0, 65530, 4, 0, 65529, 4, 0, 65528, 4, 0, 65530, 5, 0, 65531, 5, 0, 65531, 6, 0, 65532, 7, 0, 65533, 8, 0, 65534, 8, 0, 65535, 9, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 8, 0, 2, 8, 0, 4, 7, 0, 5, 6, 0, 5, 5, 0, 5, 4, 0, 5, 3, 0, 5, 2, 0, 4, 1, 0, 3, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 0, 65534, 65535, 0, 65533, 65535, 0, 65532, 65535, 0, 65532, 65534, 0, 65531, 65534, 0, 65531, 65533, 0, 65531, 65532, 0, 65532, 65532, 0, 65532, 65531, 0, 65533, 65531, 0, 65534, 65531, 0, 65535, 65532, 0, 0, 65532, 0, 1, 65532, 0, 1, 65533, 0, 2, 65533, 0, 2, 65534, 0, 3, 65534, 0, 4, 65535, 0, 5, 65535, 0, 6, 65535, 0, 7, 65534, 0, 8, 65534, 0, 9, 65533, 0, 9, 65532, 0, 9, 65531, 0, 9, 65530, 0, 9, 65529, 0, 9, 65528, 0, 8, 65527, 0, 8, 65526, 0, 7, 65525, 0, 6, 65524, 0, 6, 65523, 0, 5, 65523, 0, 4, 65523, 0, 3, 65523, 0, 4, 65524, 0, 5, 65524, 0, 5, 65525, 0, 6, 65525, 0, 6, 65526, 0, 7, 65526, 0, 6, 65527, 0, 7, 65527, 0, 7, 65528, 0, 8, 65528, 0, 7, 65529, 0, 8, 65529, 0, 8, 65530, 0, 8, 65531, 0, 8, 65532, 0, 7, 65532, 0, 7, 65533, 0, 8, 65533, 0, 6, 65533, 0, 5, 65533, 0, 4, 65533, 0, 4, 65534, 0, 5, 65534, 0, 6, 65534, 0, 3, 65533, 0, 3, 65532, 0, 2, 65532, 0, 2, 65531, 0, 1, 65531, 0, 0, 65531, 0, 0, 65530, 0, 65535, 65530, 0, 65535, 65531, 0, 65534, 65530, 0, 65533, 65530, 0, 65532, 65530, 0, 65531, 65531, 0, 65531, 65530, 0, 65530, 65531, 0, 65530, 65532, 0, 65530, 65533, 0, 65530, 65534, 0, 65530, 65535, 0, 65531, 65535, 0, 65531, 0, 0, 65532, 0, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 3, 3, 0, 4, 3, 0, 4, 4, 0, 4, 5, 0, 3, 5, 0, 3, 6, 0, 4, 6, 0, 3, 7, 0, 2, 7, 0, 1, 7, 0, 1, 8, 0, 0, 8, 0, 65535, 8, 0, 65535, 7, 0, 0, 7, 0, 65534, 7, 0, 65533, 7, 0, 65534, 6, 0, 65533, 6, 0, 65532, 6, 0, 65532, 5, 0, 65531, 4, 0)
+}
+script = ExtResource("3_3253y")
+occupied_material = SubResource("StandardMaterial3D_l71k7")

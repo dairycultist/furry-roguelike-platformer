@@ -12,10 +12,11 @@ func _ready() -> void:
 	_material = $Mesh.get_surface_override_material(0).duplicate();
 	$Mesh.set_surface_override_material(0, _material);
 
-func attack(dmg : int) -> void:
+func attack(dmg: int, from: Vector3) -> void:
+	from.y = global_position.y;
 	_hit_fac = 0.0;
 	_health -= dmg;
-	$Mesh.position = 0.25 * Vector3(randfn(0, 1), 0.0, randfn(0, 1)).normalized();
+	$Mesh.global_position += 0.25 * (global_position - from).normalized();
 	if _health <= 0:
 		get_parent().alert_enemy_defeated(_money_value);
 		queue_free();
