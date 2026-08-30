@@ -113,10 +113,7 @@ offset_top = -228.0
 offset_right = 136.0
 offset_bottom = -127.0
 grow_vertical = 0
-text = "1 - Place Cannon
-2 - Place Sniper
-3 - Place Omnigun
-4 - Place Mortar"
+text = "info"
 vertical_alignment = 2
 
 [node name="CameraAnchor" type="Node3D" parent="GridMap/Player" unique_id=310821411]

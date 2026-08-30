@@ -65,11 +65,14 @@ func _process(delta: float) -> void:
 			selected_tower.poke();
 			
 			$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(0.4, 0.2, 1.0, 0.5);
+			set_tower_types_displayed(false, ["nuthin'"]);
 			
 		else:
 			$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5);
+			set_tower_types_displayed(false, []);
 	else:
 		$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(0.1, 0.6, 1.0, 0.5);
+		set_tower_types_displayed(true, ["Cannon", "Sniper", "Omnigun", "Mortar"]);
 	
 	# move cursor to selection
 	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 15.0 * delta);
@@ -95,3 +98,15 @@ func _process(delta: float) -> void:
 		grid.set_cell_item(selected_pos, 0);
 		
 		towers_by_position[selected_pos] = tower;
+
+func set_tower_types_displayed(place_otherwise_upgrade : bool, types : Array[String]):
+	
+	$TowerTypeLabel.text = "";
+	
+	if place_otherwise_upgrade:
+		for i in range(0, types.size()):
+			$TowerTypeLabel.text += str(i + 1, " - Place ", types[i], "\n");
+	else:
+		for i in range(0, types.size()):
+			$TowerTypeLabel.text += str(i + 1, " - Upgrade to ", types[i], "\n");
+		$TowerTypeLabel.text += str(4, " - Destroy\n");
