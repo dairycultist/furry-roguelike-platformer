@@ -1,9 +1,7 @@
 extends Node3D;
 
-var cannon_example : Tower;
-var sniper_example : Tower;
-var omnigun_example : Tower;
-var mortar_example : Tower;
+var tower_packed_scene_to_example = {};
+var base_tower_examples : Array[Tower] = [];
 
 @export var grid : GridMap;
 @export var enemy_path : Path3D;
@@ -20,19 +18,25 @@ var money : int:
 
 var towers_by_position = {};
 
+func _create_example_for(packed_scene: PackedScene):
+	
+	var example := packed_scene.instantiate();
+	example.process_mode = Node.PROCESS_MODE_DISABLED;
+	tower_packed_scene_to_example[packed_scene] = example;
+
 func _ready() -> void:
 	
-	cannon_example = load("res://tower/cannon/cannon1.tscn").instantiate();
-	cannon_example.process_mode = Node.PROCESS_MODE_DISABLED;
+	_create_example_for(load("res://tower/cannon/cannon1.tscn"));
+	_create_example_for(load("res://tower/sniper/sniper1.tscn"));
+	_create_example_for(load("res://tower/omnigun/omnigun1.tscn"));
+	_create_example_for(load("res://tower/mortar/mortar1.tscn"));
 	
-	sniper_example = load("res://tower/sniper/sniper1.tscn").instantiate();
-	sniper_example.process_mode = Node.PROCESS_MODE_DISABLED;
-	
-	omnigun_example = load("res://tower/omnigun/omnigun1.tscn").instantiate();
-	omnigun_example.process_mode = Node.PROCESS_MODE_DISABLED;
-	
-	mortar_example = load("res://tower/mortar/mortar1.tscn").instantiate();
-	mortar_example.process_mode = Node.PROCESS_MODE_DISABLED;
+	base_tower_examples = [
+		tower_packed_scene_to_example[load("res://tower/cannon/cannon1.tscn")],
+		tower_packed_scene_to_example[load("res://tower/sniper/sniper1.tscn")],
+		tower_packed_scene_to_example[load("res://tower/omnigun/omnigun1.tscn")],
+		tower_packed_scene_to_example[load("res://tower/mortar/mortar1.tscn")]
+	];
 	
 	money = 50;
 
@@ -81,16 +85,24 @@ func _process(delta: float) -> void:
 			
 			$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(0.4, 0.2, 1.0, 0.5);
 			
-			# TODO towers should be able to report an array of what
-			# towers they can upgrade to
-			run_tower_placement_options(selected_pos, selected_tower, []);
+			# tell the tower instance about our list of examples for its upgrades
+			if selected_tower.needs_examples:
+				
+				selected_tower.needs_examples = false;
+				
+				for packed_scene in selected_tower.upgrade_options:
+					if not tower_packed_scene_to_example[packed_scene]:
+						_create_example_for(packed_scene);
+					selected_tower.upgrade_options_examples.push_back(tower_packed_scene_to_example[packed_scene]);
+			
+			run_tower_placement_options(selected_pos, selected_tower, selected_tower.upgrade_options_examples);
 			
 		else:
 			$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(1.0, 0.2, 0.2, 0.5);
 			run_tower_placement_options(selected_pos, null, []);
 	else:
 		$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(0.1, 0.6, 1.0, 0.5);
-		run_tower_placement_options(selected_pos, null, [cannon_example, sniper_example, omnigun_example, mortar_example]);
+		run_tower_placement_options(selected_pos, null, base_tower_examples);
 	
 	# move cursor to selection
 	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 15.0 * delta);
@@ -150,11 +162,12 @@ func run_tower_placement_options(selected_pos : Vector3i, selected_tower : Tower
 		tower.enemy_path = enemy_path;
 		tower.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);
 		
-		# TODO delete original tower at this position
-		#if place_otherwise_upgrade:
-		
-		# occupy the cell at this position
-		grid.set_cell_item(selected_pos, 0);
+		if selected_tower:
+			# delete original tower at this position
+			selected_tower.queue_free();
+		else:
+			# occupy the cell at this position
+			grid.set_cell_item(selected_pos, 0);
 		
 		# register this tower at this position
 		towers_by_position[selected_pos] = tower;

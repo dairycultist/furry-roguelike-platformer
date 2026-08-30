@@ -6,6 +6,10 @@ class_name Tower;
 @export var cost : int = 0;
 @export var sell_value : int = 0;
 
+@export var upgrade_options : Array[PackedScene];
+var needs_examples : bool = true;
+var upgrade_options_examples : Array[Tower] = [];
+
 @export var damage : int = 1;
 @export var max_targeting_distance : int = 3;
 @export var long_range_only : bool = false;
