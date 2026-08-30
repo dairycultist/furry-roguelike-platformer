@@ -16,6 +16,7 @@ four base tower types
 - tack-shooter type thing
   - upgrades to become either tesla tower (multiple hits per hit) or fire tower (applies burn effect)
 - sniper
+  - upgrades to railgun https://preview.redd.it/medium-should-get-a-railgun-for-season-4-if-it-is-sci-fi-or-v0-536ffi7cbhnd1.jpeg?width=1080&crop=smart&auto=webp&s=b446677aa0d562fd8fd48bb3dc74cc94916dffec
 
 the fun of tower defense is in the breadth of choices, so distinct upgrade paths are a must, making
 sure that there are synergies and no one best strategy/playstyle

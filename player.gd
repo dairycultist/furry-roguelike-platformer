@@ -1,6 +1,6 @@
 extends Node3D;
 
-const turret_prefab = preload("res://turret/turret.tscn");
+const cannon_prefab = preload("res://tower/cannon1.tscn");
 
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;
@@ -8,15 +8,15 @@ const turret_prefab = preload("res://turret/turret.tscn");
 
 var grid : GridMap;
 var enemy_path : Path3D;
-var turret_parent : Node3D;
+var tower_parent : Node3D;
 
-var turrets_by_position = {};
+var towers_by_position = {};
 
 func _ready() -> void:
 	
 	grid = get_parent();
 	enemy_path = grid.get_node("EnemyPath");
-	turret_parent = grid.get_node("TurretParent");
+	tower_parent = grid.get_node("TowerParent");
 
 func _process(delta: float) -> void:
 	
@@ -55,11 +55,11 @@ func _process(delta: float) -> void:
 	
 	if pos_occupied:
 		
-		if turrets_by_position.has(selected_pos):
+		if towers_by_position.has(selected_pos):
 			
-			var selected_turret : Node3D = turrets_by_position[selected_pos];
+			var selected_tower : Node3D = towers_by_position[selected_pos];
 			
-			selected_turret.poke();
+			selected_tower.poke();
 			
 			$Cursor/Mesh.get_surface_override_material(0).albedo_color = Color(0.4, 0.2, 1.0, 0.5);
 			
@@ -74,12 +74,12 @@ func _process(delta: float) -> void:
 	# placing turret
 	if Input.is_action_just_pressed("use_tool") and not pos_occupied:
 		
-		var turret = turret_prefab.instantiate();
+		var tower = cannon_prefab.instantiate();
 		
-		turret_parent.add_child(turret);
-		turret.enemy_path = enemy_path;
-		turret.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);
+		tower_parent.add_child(tower);
+		tower.enemy_path = enemy_path;
+		tower.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);
 		
 		grid.set_cell_item(selected_pos, 0);
 		
-		turrets_by_position[selected_pos] = turret;
+		towers_by_position[selected_pos] = tower;

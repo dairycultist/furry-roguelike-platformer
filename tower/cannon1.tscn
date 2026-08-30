@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wx2falj44yrt"]
 
-[ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://turret.gd" id="1_pjkpn"]
+[ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://tower/tower.gd" id="1_pjkpn"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_gspl5"]
 [ext_resource type="ArrayMesh" uid="uid://bbfmffnqawaxr" path="res://tower/cannon1_head.obj" id="3_iiq27"]
 [ext_resource type="ArrayMesh" uid="uid://ck8wd4jj54rim" path="res://tower/cannon1_barrel.obj" id="4_ddt3l"]
@@ -19,21 +19,21 @@ shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
 
-[node name="Turret" type="Node3D" unique_id=1625817297]
+[node name="Cannon" type="Node3D" unique_id=1625817297]
 script = ExtResource("1_pjkpn")
 
-[node name="TurretBase" type="MeshInstance3D" parent="." unique_id=798336857]
+[node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_gspl5")
 
-[node name="TurretHead" type="MeshInstance3D" parent="." unique_id=823903376]
+[node name="Head" type="MeshInstance3D" parent="." unique_id=823903376]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 mesh = ExtResource("3_iiq27")
 
-[node name="TurretBarrel" type="MeshInstance3D" parent="TurretHead" unique_id=569734477]
+[node name="Barrel" type="MeshInstance3D" parent="Head" unique_id=569734477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22995989, 0)
 mesh = ExtResource("4_ddt3l")
 
-[node name="TurretMuzzleFlash" type="MeshInstance3D" parent="TurretHead/TurretBarrel" unique_id=2026340139]
+[node name="MuzzleFlash" type="MeshInstance3D" parent="Head/Barrel" unique_id=2026340139]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.3825801)
 mesh = ExtResource("5_41n4c")
 surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")

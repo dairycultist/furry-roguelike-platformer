@@ -31,25 +31,25 @@ func _process(delta: float) -> void:
 	if (not fire_cooldown < 0.0):
 		fire_cooldown -= delta;
 	
-	# turret animation
-	$TurretHead/TurretBarrel.scale = lerp($TurretHead/TurretBarrel.scale, Vector3.ONE, 5.0 * delta);
-	$TurretHead/TurretBarrel/TurretMuzzleFlash.scale = lerp($TurretHead/TurretBarrel/TurretMuzzleFlash.scale, Vector3.ZERO, 12.0 * delta);
+	# animation
+	$Head/Barrel.scale = lerp($Head/Barrel.scale, Vector3.ONE, 5.0 * delta);
+	$Head/Barrel/MuzzleFlash.scale = lerp($Head/Barrel/MuzzleFlash.scale, Vector3.ZERO, 12.0 * delta);
 	
 	if target:
 	
 		# fire at target
-		$TurretHead.look_at(Vector3(target.global_position.x, global_position.y, target.global_position.z), Vector3.UP, true);
+		$Head.look_at(Vector3(target.global_position.x, global_position.y, target.global_position.z), Vector3.UP, true);
 		
 		if (fire_cooldown < 0.0):
 			
 			fire_cooldown = 1.0;
-			$TurretHead/TurretBarrel.scale = Vector3(1.2, 1.2, 0.7);
-			$TurretHead/TurretBarrel/TurretMuzzleFlash.scale = Vector3(1.5, 1.5, 2.5);
+			$Head/Barrel.scale = Vector3(1.2, 1.2, 0.7);
+			$Head/Barrel/MuzzleFlash.scale = Vector3(1.5, 1.5, 2.5);
 			target.attack(damage);
 	
 	else:
 		
-		$TurretHead.global_rotation.y += 0.5 * delta;
+		$Head.global_rotation.y += 0.5 * delta;
 
 func poke():
 	

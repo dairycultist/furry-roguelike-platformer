@@ -138,4 +138,4 @@ progress = 4.0
 transform = Transform3D(-0.036045827, 0, -0.9993252, 0, 1.0000056, 0, 0.9993252, 0, -0.036045827, -8.746054, 0, 3.0748296)
 progress = 6.0
 
-[node name="TurretParent" type="Node3D" parent="GridMap" unique_id=57393167]
+[node name="TowerParent" type="Node3D" parent="GridMap" unique_id=57393167]
