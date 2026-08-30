@@ -2,6 +2,7 @@ extends PathFollow3D;
 
 @export var _speed : float = 1.0;
 @export var _health : int = 3;
+@export var _money_value : int = 10;
 
 var _hit_fac : float = 1.0;
 
@@ -16,6 +17,7 @@ func attack(dmg : int) -> void:
 	_health -= dmg;
 	$Mesh.position = 0.25 * Vector3(randfn(0, 1), 0.0, randfn(0, 1)).normalized();
 	if _health <= 0:
+		get_parent().alert_enemy_defeated(_money_value);
 		queue_free();
 
 func _process(delta: float) -> void:

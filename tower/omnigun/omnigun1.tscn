@@ -22,6 +22,8 @@ shader_parameter/exponent = 10.0
 
 [node name="Omnigun" type="Node3D" unique_id=1625817297]
 script = ExtResource("1_jqjya")
+title = "Omnigun"
+cost = 150
 omnigun_animation = true
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]

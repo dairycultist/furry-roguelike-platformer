@@ -14,6 +14,7 @@ render_priority = 0
 shader = ExtResource("6_v0qna")
 shader_parameter/albedo = ExtResource("7_gjumv")
 shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/hit_fac = 1.0
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
@@ -21,6 +22,8 @@ shader_parameter/exponent = 10.0
 
 [node name="Cannon" type="Node3D" unique_id=1625817297]
 script = ExtResource("1_kybsl")
+title = "Cannon"
+cost = 25
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_gspl5")

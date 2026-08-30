@@ -14,6 +14,7 @@ render_priority = 0
 shader = ExtResource("6_pa1ad")
 shader_parameter/albedo = ExtResource("7_h3smt")
 shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/hit_fac = 1.0
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
@@ -21,6 +22,8 @@ shader_parameter/exponent = 10.0
 
 [node name="Mortar" type="Node3D" unique_id=1625817297]
 script = ExtResource("1_hlpm8")
+title = "Mortar"
+cost = 225
 max_targeting_distance = 7
 long_range_only = true
 

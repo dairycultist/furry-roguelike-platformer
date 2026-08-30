@@ -7,6 +7,7 @@
 [ext_resource type="ArrayMesh" uid="uid://chrc7hrfxtyul" path="res://path.obj" id="4_m7jmp"]
 [ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
 [ext_resource type="PackedScene" uid="uid://cb5sx04t1xbpo" path="res://enemy.tscn" id="7_ni31j"]
+[ext_resource type="Script" uid="uid://baf7a64j7ehvq" path="res://enemy_path.gd" id="7_xlvrw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(26, 26)
@@ -82,19 +83,6 @@ layers = 3
 mesh = ExtResource("4_m7jmp")
 surface_material_override/0 = SubResource("ShaderMaterial_y2354")
 
-[node name="Label" type="Label" parent="." unique_id=16969720]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -49.0
-offset_right = 136.0
-grow_vertical = 0
-text = "Z/X - Rotate
-Shift + Z/X - Zoom
-Arrow keys - Pan
-Shift + Arrow keys - Pan slowly"
-vertical_alignment = 2
-
 [node name="GridMap" type="GridMap" parent="." unique_id=269219875]
 mesh_library = SubResource("MeshLibrary_lxpj2")
 cell_size = Vector3(1, 1, 1)
@@ -106,17 +94,6 @@ occupied_material = SubResource("StandardMaterial3D_l71k7")
 
 [node name="Player" type="Node3D" parent="GridMap" unique_id=945685676]
 script = ExtResource("2_nxogm")
-
-[node name="TowerTypeLabel" type="Label" parent="GridMap/Player" unique_id=490998936]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -228.0
-offset_right = 136.0
-offset_bottom = -127.0
-grow_vertical = 0
-text = "info"
-vertical_alignment = 2
 
 [node name="CameraAnchor" type="Node3D" parent="GridMap/Player" unique_id=310821411]
 
@@ -133,8 +110,64 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_lxpj2")
 surface_material_override/0 = SubResource("StandardMaterial3D_u3cyc")
 
-[node name="EnemyPath" type="Path3D" parent="GridMap" unique_id=320968486]
+[node name="InfoBox" type="Control" parent="GridMap/Player" unique_id=202553279]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -259.0
+offset_top = -335.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="GridMap/Player/InfoBox" unique_id=1140183359]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3137255)
+
+[node name="ControlsLabel" type="Label" parent="GridMap/Player/InfoBox" unique_id=16969720]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 226.0
+offset_right = 242.0
+offset_bottom = 327.0
+theme_override_colors/font_color = Color(0.63841295, 0.8573782, 0.94089675, 1)
+theme_override_font_sizes/font_size = 12
+text = "Z/X - Rotate
+Shift + Z/X - Zoom
+Arrow keys - Pan
+Shift + Arrow keys - Pan slowly"
+vertical_alignment = 2
+
+[node name="MoneyLabel" type="Label" parent="GridMap/Player/InfoBox" unique_id=1391859905]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 247.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0.9696464, 0.94566506, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "$money"
+
+[node name="TowerTypeLabel" type="RichTextLabel" parent="GridMap/Player/InfoBox" unique_id=1011735510]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 48.0
+offset_right = 239.0
+offset_bottom = 240.0
+bbcode_enabled = true
+text = "info"
+
+[node name="EnemyPath" type="Path3D" parent="GridMap" unique_id=320968486 node_paths=PackedStringArray("_player")]
 curve = SubResource("Curve3D_y2354")
+script = ExtResource("7_xlvrw")
+_player = NodePath("../Player")
 
 [node name="Enemy1" parent="GridMap/EnemyPath" unique_id=1505863252 instance=ExtResource("7_ni31j")]
 transform = Transform3D(0.6542781, 0, -0.7562211, 0, 1.0000056, 0, 0.7562211, 0, 0.6542781, -13.951372, 0, 5.6567516)
