@@ -1,6 +1,6 @@
 extends Node3D;
 
-const cannon_prefab = preload("res://tower/cannon1.tscn");
+const cannon_prefab = preload("res://tower/cannon/cannon1.tscn");
 
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;

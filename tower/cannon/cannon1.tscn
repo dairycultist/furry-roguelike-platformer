@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://wx2falj44yrt"]
 
-[ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://tower/tower.gd" id="1_pjkpn"]
+[ext_resource type="Script" uid="uid://b7anm7j1d1ic1" path="res://tower/cannon/cannon.gd" id="1_kybsl"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_gspl5"]
-[ext_resource type="ArrayMesh" uid="uid://bbfmffnqawaxr" path="res://tower/cannon1_head.obj" id="3_iiq27"]
-[ext_resource type="ArrayMesh" uid="uid://ck8wd4jj54rim" path="res://tower/cannon1_barrel.obj" id="4_ddt3l"]
+[ext_resource type="ArrayMesh" uid="uid://bbfmffnqawaxr" path="res://tower/cannon/cannon1_head.obj" id="3_iiq27"]
+[ext_resource type="ArrayMesh" uid="uid://ck8wd4jj54rim" path="res://tower/cannon/cannon1_barrel.obj" id="4_ddt3l"]
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_41n4c"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_v0qna"]
 [ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_gjumv"]
@@ -20,7 +20,7 @@ shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
 
 [node name="Cannon" type="Node3D" unique_id=1625817297]
-script = ExtResource("1_pjkpn")
+script = ExtResource("1_kybsl")
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_gspl5")

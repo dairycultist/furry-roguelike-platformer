@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://tower/tower.gd" id="1_h6r45"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_jna55"]
-[ext_resource type="ArrayMesh" uid="uid://d4nxq7nw3jlky" path="res://tower/sniper1_head.obj" id="3_h6r45"]
-[ext_resource type="ArrayMesh" uid="uid://ewpk2j13tusx" path="res://tower/sniper1_barrel.obj" id="4_jna55"]
+[ext_resource type="ArrayMesh" uid="uid://d4nxq7nw3jlky" path="res://tower/sniper/sniper1_head.obj" id="3_h6r45"]
+[ext_resource type="ArrayMesh" uid="uid://ewpk2j13tusx" path="res://tower/sniper/sniper1_barrel.obj" id="4_jna55"]
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_qej70"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_q3a56"]
 [ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_ydtxl"]

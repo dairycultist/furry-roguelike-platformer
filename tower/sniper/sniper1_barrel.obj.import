@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ewpk2j13tusx"
+path="res://.godot/imported/sniper1_barrel.obj-f85d3485200a6de9e6dd83fd0b0ae9ef.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sniper1_barrel.obj-f85d3485200a6de9e6dd83fd0b0ae9ef.mesh"]
+
+source_file="res://tower/sniper/sniper1_barrel.obj"
+dest_files=["res://.godot/imported/sniper1_barrel.obj-f85d3485200a6de9e6dd83fd0b0ae9ef.mesh", "res://.godot/imported/sniper1_barrel.obj-f85d3485200a6de9e6dd83fd0b0ae9ef.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://tower/tower.gd" id="1_aa4nq"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_edw4o"]
-[ext_resource type="ArrayMesh" uid="uid://38iu0jyphmiw" path="res://tower/mortar1_head.obj" id="3_aa4nq"]
-[ext_resource type="ArrayMesh" uid="uid://dn4u3hpw5cey8" path="res://tower/mortar1_barrel.obj" id="4_edw4o"]
+[ext_resource type="ArrayMesh" uid="uid://38iu0jyphmiw" path="res://tower/mortar/mortar1_head.obj" id="3_aa4nq"]
+[ext_resource type="ArrayMesh" uid="uid://dn4u3hpw5cey8" path="res://tower/mortar/mortar1_barrel.obj" id="4_edw4o"]
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_nqktt"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_pa1ad"]
 [ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_h3smt"]
