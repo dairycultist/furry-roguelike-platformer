@@ -3,8 +3,8 @@ extends Node3D;
 class_name Tower;
 
 @export var damage : int = 1;
-# TODO @export var min_targeting_distance : int = 0;
 @export var max_targeting_distance : int = 3;
+@export var long_range_only : bool = false;
 
 var enemy_path : Node3D;
 
@@ -31,7 +31,10 @@ func _process(delta: float) -> void:
 	var in_range : Array[Node3D] = [];
 		
 	for enemy in enemy_path.get_children():
-		if Vector3(enemy.global_position.x, 0.0, enemy.global_position.z).distance_to(global_position) <= max_targeting_distance + 0.5:
+		
+		var dist = Vector3(enemy.global_position.x, 0.0, enemy.global_position.z).distance_to(global_position);
+		
+		if dist <= max_targeting_distance + 0.5 and (not long_range_only or dist >= (max_targeting_distance + 0.5) / 2.0):
 			in_range.push_front(enemy);
 	
 	# do stuff with targets

@@ -7,7 +7,7 @@
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_qej70"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_q3a56"]
 [ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_ydtxl"]
-[ext_resource type="Texture2D" uid="uid://c64dvti0otlrp" path="res://radius.png" id="8_rhqjv"]
+[ext_resource type="Texture2D" uid="uid://4bsvmoct5kwv" path="res://radius_longrange.png" id="8_4aon5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rfjx"]
 render_priority = 0
@@ -22,6 +22,7 @@ shader_parameter/exponent = 10.0
 [node name="Sniper" type="Node3D" unique_id=1625817297]
 script = ExtResource("1_4aon5")
 max_targeting_distance = 7
+long_range_only = true
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_jna55")
@@ -41,7 +42,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
 
 [node name="Radius" type="Decal" parent="." unique_id=467498380]
 size = Vector3(3, 2, 3)
-texture_albedo = ExtResource("8_rhqjv")
+texture_albedo = ExtResource("8_4aon5")
 albedo_mix = 0.3
 upper_fade = 1e-05
 lower_fade = 1e-05

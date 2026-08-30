@@ -93,20 +93,6 @@ Arrow keys - Pan
 Shift + Arrow keys - Pan slowly"
 vertical_alignment = 2
 
-[node name="TowerTypeLabel" type="Label" parent="." unique_id=490998936]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -228.0
-offset_right = 136.0
-offset_bottom = -127.0
-grow_vertical = 0
-text = "1 - Place Cannon
-2 - Place Mortar
-3 - Place Sniper
-4 - burger"
-vertical_alignment = 2
-
 [node name="GridMap" type="GridMap" parent="." unique_id=269219875]
 mesh_library = SubResource("MeshLibrary_lxpj2")
 cell_size = Vector3(1, 1, 1)
@@ -118,6 +104,20 @@ occupied_material = SubResource("StandardMaterial3D_l71k7")
 
 [node name="Player" type="Node3D" parent="GridMap" unique_id=945685676]
 script = ExtResource("2_nxogm")
+
+[node name="TowerTypeLabel" type="Label" parent="GridMap/Player" unique_id=490998936]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -228.0
+offset_right = 136.0
+offset_bottom = -127.0
+grow_vertical = 0
+text = "1 - Place Cannon
+2 - Place Sniper
+3 - 
+4 - Place Mortar"
+vertical_alignment = 2
 
 [node name="CameraAnchor" type="Node3D" parent="GridMap/Player" unique_id=310821411]
 
