@@ -2,7 +2,7 @@ extends Node3D;
 
 const cannon_prefab = preload("res://tower/cannon/cannon1.tscn");
 const sniper_prefab = preload("res://tower/sniper/sniper1.tscn");
-
+const omnigun_prefab = preload("res://tower/omnigun/omnigun1.tscn");
 const mortar_prefab = preload("res://tower/mortar/mortar1.tscn");
 
 @export var ZOOM_SPEED := 10.0;
@@ -84,7 +84,7 @@ func _process(delta: float) -> void:
 		elif Input.is_action_just_pressed("tool_2"):
 			tower = sniper_prefab.instantiate();
 		elif Input.is_action_just_pressed("tool_3"):
-			tower = cannon_prefab.instantiate();
+			tower = omnigun_prefab.instantiate();
 		else:
 			tower = mortar_prefab.instantiate();
 		

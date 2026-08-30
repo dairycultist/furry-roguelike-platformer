@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://bel1vj1k5u4e6"]
+
+[ext_resource type="Script" uid="uid://b7anm7j1d1ic1" path="res://tower/cannon/cannon.gd" id="1_k0e3i"]
+[ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_ay6aj"]
+[ext_resource type="ArrayMesh" uid="uid://dkljptneoieg6" path="res://tower/omnigun/omnigun1_head.obj" id="3_jqjya"]
+[ext_resource type="ArrayMesh" uid="uid://dsn5uqli2lt3p" path="res://tower/omnigun/omnigun1_barrel.obj" id="4_prxjp"]
+[ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_acs8w"]
+[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_osdpi"]
+[ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_oxa0x"]
+[ext_resource type="Texture2D" uid="uid://c64dvti0otlrp" path="res://radius.png" id="8_n53jb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rfjx"]
+render_priority = 0
+shader = ExtResource("6_osdpi")
+shader_parameter/albedo = ExtResource("7_oxa0x")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 0.2
+shader_parameter/exponent = 10.0
+
+[node name="Omnigun" type="Node3D" unique_id=1625817297]
+script = ExtResource("1_k0e3i")
+omnigun_animation = true
+
+[node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
+mesh = ExtResource("2_ay6aj")
+
+[node name="Head" type="MeshInstance3D" parent="." unique_id=823903376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = ExtResource("3_jqjya")
+
+[node name="Barrel" type="MeshInstance3D" parent="Head" unique_id=569734477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17595915, 0)
+mesh = ExtResource("4_prxjp")
+
+[node name="MuzzleFlash" type="Node3D" parent="Head/Barrel" unique_id=991146428]
+transform = Transform3D(0.09238795, 0, 0.038268346, 0, 0.1, 0, -0.038268346, 0, 0.09238795, 0, 0, 0)
+
+[node name="Mesh1" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=2026340139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4394195)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=463874450]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.439)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Mesh3" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=1314787004]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.439, 0, 0)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Mesh4" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=1953593249]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.439, 0, 0)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Mesh5" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=1471524822]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -0.307, 0, 0.307)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Mesh6" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=331403285]
+transform = Transform3D(-0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071067, 0.307, 0, -0.307)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Mesh7" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=2050836938]
+transform = Transform3D(0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071067, 0.307, 0, 0.307)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Mesh8" type="MeshInstance3D" parent="Head/Barrel/MuzzleFlash" unique_id=930854161]
+transform = Transform3D(-0.70710677, 0, -0.70710665, 0, 1, 0, 0.70710665, 0, -0.70710677, -0.307, 0, -0.307)
+mesh = ExtResource("5_acs8w")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Radius" type="Decal" parent="." unique_id=467498380]
+size = Vector3(3, 2, 3)
+texture_albedo = ExtResource("8_n53jb")
+albedo_mix = 0.3
+upper_fade = 1e-05
+lower_fade = 1e-05
+cull_mask = 2

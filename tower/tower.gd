@@ -5,6 +5,7 @@ class_name Tower;
 @export var damage : int = 1;
 @export var max_targeting_distance : int = 3;
 @export var long_range_only : bool = false;
+@export var omnigun_animation : bool = false;
 
 var enemy_path : Node3D;
 
@@ -25,7 +26,11 @@ func _process(delta: float) -> void:
 	
 	# animation
 	$Head/Barrel.scale = lerp($Head/Barrel.scale, Vector3.ONE, 5.0 * delta);
-	$Head/Barrel/MuzzleFlash.scale = lerp($Head/Barrel/MuzzleFlash.scale, Vector3.ZERO, 12.0 * delta);
+	
+	if omnigun_animation:
+		$Head/Barrel/MuzzleFlash.scale = lerp($Head/Barrel/MuzzleFlash.scale, Vector3.ZERO, 3.0 * delta);
+	else:
+		$Head/Barrel/MuzzleFlash.scale = lerp($Head/Barrel/MuzzleFlash.scale, Vector3.ZERO, 12.0 * delta);
 	
 	# get targets in range
 	var in_range : Array[Node3D] = [];
@@ -40,17 +45,24 @@ func _process(delta: float) -> void:
 	# do stuff with targets
 	if not in_range.is_empty():
 		
-		# look at target
-		var look_at_target := pick_target_to_face(in_range);
-		
-		$Head.look_at(Vector3(look_at_target.global_position.x, global_position.y, look_at_target.global_position.z), Vector3.UP, true);
+		# targeting animation
+		if omnigun_animation:
+			$Head.global_rotation.y += 0.5 * delta;
+		else:
+			var look_at_target := pick_target_to_face(in_range);
+			$Head.look_at(Vector3(look_at_target.global_position.x, global_position.y, look_at_target.global_position.z), Vector3.UP, true);
 		
 		# fire at target
 		if (fire_cooldown < 0.0):
 			
 			fire_cooldown = 1.0;
-			$Head/Barrel.scale = Vector3(1.2, 1.2, 0.7);
-			$Head/Barrel/MuzzleFlash.scale = Vector3(1.5, 1.5, 2.5);
+			
+			if omnigun_animation:
+				$Head/Barrel.scale = Vector3(0.8, 1.2, 0.8);
+				$Head/Barrel/MuzzleFlash.scale = Vector3(1.0, 1.0, 1.0);
+			else:
+				$Head/Barrel.scale = Vector3(1.2, 1.2, 0.7);
+				$Head/Barrel/MuzzleFlash.scale = Vector3(1.5, 1.5, 2.5);
 			
 			for enemy in pick_targets_to_attack(in_range):
 				enemy.attack(damage);
