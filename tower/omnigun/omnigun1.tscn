@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bel1vj1k5u4e6"]
 
-[ext_resource type="Script" uid="uid://b7anm7j1d1ic1" path="res://tower/cannon/cannon.gd" id="1_k0e3i"]
+[ext_resource type="Script" uid="uid://d1ehp5t5r8lxl" path="res://tower/omnigun/omnigun.gd" id="1_jqjya"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_ay6aj"]
 [ext_resource type="ArrayMesh" uid="uid://dkljptneoieg6" path="res://tower/omnigun/omnigun1_head.obj" id="3_jqjya"]
 [ext_resource type="ArrayMesh" uid="uid://dsn5uqli2lt3p" path="res://tower/omnigun/omnigun1_barrel.obj" id="4_prxjp"]
@@ -14,13 +14,14 @@ render_priority = 0
 shader = ExtResource("6_osdpi")
 shader_parameter/albedo = ExtResource("7_oxa0x")
 shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/hit_fac = 1.0
 shader_parameter/origin_fade_dist = 12.0
 shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
 
 [node name="Omnigun" type="Node3D" unique_id=1625817297]
-script = ExtResource("1_k0e3i")
+script = ExtResource("1_jqjya")
 omnigun_animation = true
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
