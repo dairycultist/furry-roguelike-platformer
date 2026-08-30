@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c64dvti0otlrp"
-path.s3tc="res://.godot/imported/radius.png-70eb92eb66e1f433c207165bb92f9e24.s3tc.ctex"
+uid="uid://xhb4a20u8dfe"
+path.s3tc="res://.godot/imported/grass.png-df8eff9846c0532ad832ddda0fd7691e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://radius.png"
-dest_files=["res://.godot/imported/radius.png-70eb92eb66e1f433c207165bb92f9e24.s3tc.ctex"]
+source_file="res://level/grass.png"
+dest_files=["res://.godot/imported/grass.png-df8eff9846c0532ad832ddda0fd7691e.s3tc.ctex"]
 
 [params]
 

@@ -7,7 +7,7 @@
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_acs8w"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_osdpi"]
 [ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_oxa0x"]
-[ext_resource type="Texture2D" uid="uid://c64dvti0otlrp" path="res://radius.png" id="8_n53jb"]
+[ext_resource type="Texture2D" uid="uid://c64dvti0otlrp" path="res://tower/radius.png" id="8_n53jb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rfjx"]
 render_priority = 0

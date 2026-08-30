@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://d3tflhq8vgolo"]
 
-[ext_resource type="Texture2D" uid="uid://xhb4a20u8dfe" path="res://grass.png" id="1_m7jmp"]
+[ext_resource type="Texture2D" uid="uid://xhb4a20u8dfe" path="res://level/grass.png" id="1_m7jmp"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="1_y2354"]
 [ext_resource type="Script" uid="uid://btguypw88w8b6" path="res://player.gd" id="2_nxogm"]
 [ext_resource type="Script" uid="uid://btc3b8xr27eyr" path="res://grid_map.gd" id="3_3253y"]
-[ext_resource type="ArrayMesh" uid="uid://chrc7hrfxtyul" path="res://path.obj" id="4_m7jmp"]
-[ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://dirt.png" id="4_u3cyc"]
-[ext_resource type="Script" uid="uid://baf7a64j7ehvq" path="res://enemy_path.gd" id="7_xlvrw"]
-[ext_resource type="Script" uid="uid://bk0lb4qx4f065" path="res://wave_orchestrator.gd" id="9_73fnb"]
+[ext_resource type="ArrayMesh" uid="uid://chrc7hrfxtyul" path="res://level/path.obj" id="4_m7jmp"]
+[ext_resource type="Texture2D" uid="uid://di8cf2ijph50w" path="res://level/dirt.png" id="4_u3cyc"]
+[ext_resource type="Script" uid="uid://baf7a64j7ehvq" path="res://enemy/enemy_path.gd" id="7_xlvrw"]
+[ext_resource type="Script" uid="uid://bk0lb4qx4f065" path="res://enemy/wave_orchestrator.gd" id="9_73fnb"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxpj2"]
 size = Vector2(26, 26)

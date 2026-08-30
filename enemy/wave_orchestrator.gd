@@ -1,6 +1,6 @@
 extends Node3D;
 
-const enemy_prefab := preload("res://enemy.tscn");
+const enemy_prefab := preload("res://enemy/enemy.tscn");
 
 @export var _enemy_path : Node3D;
 

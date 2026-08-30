@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://cb5sx04t1xbpo"]
 
-[ext_resource type="Script" uid="uid://vnpc4i2w28lh" path="res://enemy.gd" id="1_qi2p4"]
+[ext_resource type="Script" uid="uid://vnpc4i2w28lh" path="res://enemy/enemy.gd" id="1_qi2p4"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="2_iifgy"]
-[ext_resource type="Texture2D" uid="uid://8sp6e364jbjd" path="res://icon.svg" id="3_epg4t"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_x0ryr"]
+[ext_resource type="ArrayMesh" uid="uid://dr1wux8ih50qy" path="res://enemy/enemy.obj" id="2_p200p"]
+[ext_resource type="Texture2D" uid="uid://cfisk6kbeayl" path="res://enemy/enemy.png" id="4_pmsee"]
+[ext_resource type="Texture2D" uid="uid://dfyjilw5snupr" path="res://enemy/shadow.png" id="5_pmsee"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ni31j"]
 render_priority = 0
 shader = ExtResource("2_iifgy")
-shader_parameter/albedo = ExtResource("3_epg4t")
+shader_parameter/albedo = ExtResource("4_pmsee")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/hit_fac = 1.0
 shader_parameter/origin_fade_dist = 12.0
@@ -22,5 +22,14 @@ transform = Transform3D(0.9999751, 0, 0, 0, 1.0000056, 0, 0, 0, 0.9999751, 0, 0,
 script = ExtResource("1_qi2p4")
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1535816302]
-mesh = SubResource("BoxMesh_x0ryr")
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
+mesh = ExtResource("2_p200p")
 surface_material_override/0 = SubResource("ShaderMaterial_ni31j")
+
+[node name="Decal" type="Decal" parent="." unique_id=1575702774]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("5_pmsee")
+albedo_mix = 0.7
+upper_fade = 1.6502408e-05
+lower_fade = 1.0887505e-05
+cull_mask = 2
