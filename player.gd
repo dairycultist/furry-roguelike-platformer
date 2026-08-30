@@ -1,6 +1,8 @@
 extends Node3D;
 
 const cannon_prefab = preload("res://tower/cannon/cannon1.tscn");
+const mortar_prefab = preload("res://tower/mortar/mortar1.tscn");
+const sniper_prefab = preload("res://tower/sniper/sniper1.tscn");
 
 @export var ZOOM_SPEED := 10.0;
 @export var PAN_SPEED_MULT := 0.8;
@@ -71,10 +73,19 @@ func _process(delta: float) -> void:
 	# move cursor to selection
 	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 15.0 * delta);
 	
-	# placing turret
-	if Input.is_action_just_pressed("use_tool") and not pos_occupied:
+	# placing tower
+	if Input.is_action_just_pressed("tool_any") and not pos_occupied:
 		
-		var tower = cannon_prefab.instantiate();
+		var tower;
+		
+		if Input.is_action_just_pressed("tool_1"):
+			tower = cannon_prefab.instantiate();
+		elif Input.is_action_just_pressed("tool_2"):
+			tower = mortar_prefab.instantiate();
+		elif Input.is_action_just_pressed("tool_3"):
+			tower = sniper_prefab.instantiate();
+		else:
+			tower = cannon_prefab.instantiate();
 		
 		tower_parent.add_child(tower);
 		tower.enemy_path = enemy_path;

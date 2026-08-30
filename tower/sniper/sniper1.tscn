@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyk4en5nk4lh5"]
 
-[ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://tower/tower.gd" id="1_h6r45"]
+[ext_resource type="Script" uid="uid://clbr3ifhrswtc" path="res://tower/sniper/sniper.gd" id="1_4aon5"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_jna55"]
 [ext_resource type="ArrayMesh" uid="uid://d4nxq7nw3jlky" path="res://tower/sniper/sniper1_head.obj" id="3_h6r45"]
 [ext_resource type="ArrayMesh" uid="uid://ewpk2j13tusx" path="res://tower/sniper/sniper1_barrel.obj" id="4_jna55"]
@@ -19,8 +19,9 @@ shader_parameter/origin_fade_width2 = 1.0
 shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
 
-[node name="Cannon" type="Node3D" unique_id=1625817297]
-script = ExtResource("1_h6r45")
+[node name="Sniper" type="Node3D" unique_id=1625817297]
+script = ExtResource("1_4aon5")
+max_targeting_distance = 7
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_jna55")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c36jpx8yo5e1o"]
 
-[ext_resource type="Script" uid="uid://q1d42dmw4ksu" path="res://tower/tower.gd" id="1_aa4nq"]
+[ext_resource type="Script" uid="uid://ddusf3nsbsd74" path="res://tower/mortar/mortar.gd" id="1_hlpm8"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_edw4o"]
 [ext_resource type="ArrayMesh" uid="uid://38iu0jyphmiw" path="res://tower/mortar/mortar1_head.obj" id="3_aa4nq"]
 [ext_resource type="ArrayMesh" uid="uid://dn4u3hpw5cey8" path="res://tower/mortar/mortar1_barrel.obj" id="4_edw4o"]
@@ -20,7 +20,8 @@ shader_parameter/fade_corner_radius = 0.2
 shader_parameter/exponent = 10.0
 
 [node name="Mortar" type="Node3D" unique_id=1625817297]
-script = ExtResource("1_aa4nq")
+script = ExtResource("1_hlpm8")
+max_targeting_distance = 7
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_edw4o")
