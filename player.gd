@@ -99,12 +99,12 @@ func _process(delta: float) -> void:
 	# move cursor to selection
 	$Cursor.global_position = lerp($Cursor.global_position, Vector3(selected_pos) + Vector3(0.5, 0.0, 0.5), 15.0 * delta);
 
-func run_tower_placement_options(selected_pos : Vector3i, place_otherwise_upgrade : bool, types : Array[Tower]):
+func run_tower_placement_options(selected_pos : Vector3i, place_otherwise_upgrade : bool, options : Array[Tower]):
 	
 	$InfoBox/TowerTypeLabel.text = "";
 	
-	for i in range(0, types.size()):
-		$InfoBox/TowerTypeLabel.text += str("[color=white]" if types[i].cost <= money else "[color=gray]", i + 1, " - Place " if place_otherwise_upgrade else " - Upgrade to ", types[i].title, " ($", types[i].cost, ")", "[/color]", "\n");
+	for i in range(0, options.size()):
+		$InfoBox/TowerTypeLabel.text += str("[color=white]" if options[i].cost <= money else "[color=gray]", i + 1, " - Place " if place_otherwise_upgrade else " - Upgrade to ", options[i].title, " ($", options[i].cost, ")", "[/color]", "\n");
 	
 	if not place_otherwise_upgrade:
 		$InfoBox/TowerTypeLabel.text += str(4, " - Destroy (no workie)\n");
@@ -112,39 +112,44 @@ func run_tower_placement_options(selected_pos : Vector3i, place_otherwise_upgrad
 	# placing tower
 	if Input.is_action_just_pressed("tool_any"):
 		
-		if place_otherwise_upgrade:
+		var selected_option;
 		
-			var tower_type;
-			
-			if Input.is_action_just_pressed("tool_1"):
-				if types.size() < 1:
-					return;
-				tower_type = types[0];
-			elif Input.is_action_just_pressed("tool_2"):
-				if types.size() < 2:
-					return;
-				tower_type = types[1];
-			elif Input.is_action_just_pressed("tool_3"):
-				if types.size() < 3:
-					return;
-				tower_type = types[2];
-			else:
-				if types.size() < 4:
-					return;
-				tower_type = types[3];
-			
-			if tower_type.cost > money:
+		if Input.is_action_just_pressed("tool_1"):
+			if options.size() < 1:
 				return;
-			
-			money -= tower_type.cost;
-			
-			var tower = tower_type.duplicate();
-			
-			tower_parent.add_child(tower);
-			tower.process_mode = Node.PROCESS_MODE_ALWAYS;
-			tower.enemy_path = enemy_path;
-			tower.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);
-			
-			grid.set_cell_item(selected_pos, 0);
-			
-			towers_by_position[selected_pos] = tower;
+			selected_option = options[0];
+		elif Input.is_action_just_pressed("tool_2"):
+			if options.size() < 2:
+				return;
+			selected_option = options[1];
+		elif Input.is_action_just_pressed("tool_3"):
+			if options.size() < 3:
+				return;
+			selected_option = options[2];
+		else:
+			if options.size() < 4:
+				return;
+			selected_option = options[3];
+		
+		# perform money
+		if selected_option.cost > money:
+			return;
+		
+		money -= selected_option.cost;
+		
+		# instance the selected tower
+		var tower = selected_option.duplicate();
+		
+		tower_parent.add_child(tower);
+		tower.process_mode = Node.PROCESS_MODE_ALWAYS;
+		tower.enemy_path = enemy_path;
+		tower.global_position = Vector3(selected_pos.x + 0.5, 0.0, selected_pos.z + 0.5);
+		
+		# TODO delete original tower at this position
+		#if place_otherwise_upgrade:
+		
+		# occupy the cell at this position
+		grid.set_cell_item(selected_pos, 0);
+		
+		# register this tower at this position
+		towers_by_position[selected_pos] = tower;

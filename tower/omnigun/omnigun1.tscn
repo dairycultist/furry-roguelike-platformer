@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bel1vj1k5u4e6"]
 
-[ext_resource type="Script" uid="uid://d1ehp5t5r8lxl" path="res://tower/omnigun/omnigun.gd" id="1_jqjya"]
+[ext_resource type="Script" uid="uid://d1ehp5t5r8lxl" path="res://tower/omnigun.gd" id="1_jqjya"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_ay6aj"]
 [ext_resource type="ArrayMesh" uid="uid://dkljptneoieg6" path="res://tower/omnigun/omnigun1_head.obj" id="3_jqjya"]
 [ext_resource type="ArrayMesh" uid="uid://dsn5uqli2lt3p" path="res://tower/omnigun/omnigun1_barrel.obj" id="4_prxjp"]
@@ -24,7 +24,7 @@ shader_parameter/exponent = 10.0
 script = ExtResource("1_jqjya")
 title = "Omnigun"
 cost = 150
-omnigun_animation = true
+override_targeting_animation = true
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_ay6aj")

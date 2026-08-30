@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c36jpx8yo5e1o"]
 
-[ext_resource type="Script" uid="uid://ddusf3nsbsd74" path="res://tower/mortar/mortar.gd" id="1_hlpm8"]
+[ext_resource type="Script" uid="uid://ddusf3nsbsd74" path="res://tower/mortar.gd" id="1_hlpm8"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_edw4o"]
 [ext_resource type="ArrayMesh" uid="uid://38iu0jyphmiw" path="res://tower/mortar/mortar1_head.obj" id="3_aa4nq"]
 [ext_resource type="ArrayMesh" uid="uid://dn4u3hpw5cey8" path="res://tower/mortar/mortar1_barrel.obj" id="4_edw4o"]
