@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://wx2falj44yrt"]
 
 [ext_resource type="Script" uid="uid://b7anm7j1d1ic1" path="res://tower/generic_guntower.gd" id="1_kybsl"]
+[ext_resource type="PackedScene" uid="uid://ddu73fg00kbe0" path="res://tower/cannon2/cannon2.tscn" id="2_8n1pb"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_gspl5"]
 [ext_resource type="ArrayMesh" uid="uid://bbfmffnqawaxr" path="res://tower/cannon1/cannon1_head.obj" id="3_iiq27"]
 [ext_resource type="ArrayMesh" uid="uid://ck8wd4jj54rim" path="res://tower/cannon1/cannon1_barrel.obj" id="4_ddt3l"]
@@ -25,6 +26,7 @@ script = ExtResource("1_kybsl")
 title = "Cannon"
 cost = 25
 sell_value = 10
+upgrade_options = Array[PackedScene]([ExtResource("2_8n1pb")])
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("2_gspl5")
