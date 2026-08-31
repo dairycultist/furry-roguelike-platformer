@@ -26,16 +26,16 @@ func _create_example_for(packed_scene: PackedScene):
 
 func _ready() -> void:
 	
-	_create_example_for(load("res://tower/cannon/cannon1.tscn"));
-	_create_example_for(load("res://tower/sniper/sniper1.tscn"));
-	_create_example_for(load("res://tower/omnigun/omnigun1.tscn"));
-	_create_example_for(load("res://tower/mortar/mortar1.tscn"));
+	_create_example_for(load("res://tower/cannon1/cannon1.tscn"));
+	_create_example_for(load("res://tower/sniper1/sniper1.tscn"));
+	_create_example_for(load("res://tower/omnigun1/omnigun1.tscn"));
+	_create_example_for(load("res://tower/mortar1/mortar1.tscn"));
 	
 	base_tower_examples = [
-		tower_packed_scene_to_example[load("res://tower/cannon/cannon1.tscn")],
-		tower_packed_scene_to_example[load("res://tower/sniper/sniper1.tscn")],
-		tower_packed_scene_to_example[load("res://tower/omnigun/omnigun1.tscn")],
-		tower_packed_scene_to_example[load("res://tower/mortar/mortar1.tscn")]
+		tower_packed_scene_to_example[load("res://tower/cannon1/cannon1.tscn")],
+		tower_packed_scene_to_example[load("res://tower/sniper1/sniper1.tscn")],
+		tower_packed_scene_to_example[load("res://tower/omnigun1/omnigun1.tscn")],
+		tower_packed_scene_to_example[load("res://tower/mortar1/mortar1.tscn")]
 	];
 	
 	money = 5000;

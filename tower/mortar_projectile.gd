@@ -2,6 +2,10 @@ extends Node3D
 
 var _velocity : Vector3;
 
+var enemy_path : Node3D;
+var explosion_radius : float;
+var explosion_damage : int;
+
 func initialize_velocity(time_of_flight: float, dest: Vector3):
 	
 	_velocity.x = (dest.x - global_position.x) / time_of_flight;
@@ -15,4 +19,13 @@ func _process(delta: float) -> void:
 	_velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta;
 	
 	if (global_position.y < 0.0):
+		
+		# get targets in range
+		for enemy in enemy_path.get_children():
+			
+			var dist = Vector3(enemy.global_position.x, 0.0, enemy.global_position.z).distance_to(global_position);
+			
+			if dist <= explosion_radius:
+				enemy.attack(explosion_damage, global_position);
+		
 		queue_free();

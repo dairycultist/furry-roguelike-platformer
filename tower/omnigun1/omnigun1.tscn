@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d1ehp5t5r8lxl" path="res://tower/omnigun.gd" id="1_jqjya"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_ay6aj"]
-[ext_resource type="ArrayMesh" uid="uid://dkljptneoieg6" path="res://tower/omnigun/omnigun1_head.obj" id="3_jqjya"]
-[ext_resource type="ArrayMesh" uid="uid://dsn5uqli2lt3p" path="res://tower/omnigun/omnigun1_barrel.obj" id="4_prxjp"]
+[ext_resource type="ArrayMesh" uid="uid://dkljptneoieg6" path="res://tower/omnigun1/omnigun1_head.obj" id="3_jqjya"]
+[ext_resource type="ArrayMesh" uid="uid://dsn5uqli2lt3p" path="res://tower/omnigun1/omnigun1_barrel.obj" id="4_prxjp"]
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_acs8w"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_osdpi"]
 [ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="7_oxa0x"]

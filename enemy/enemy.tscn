@@ -26,7 +26,7 @@ transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5
 mesh = ExtResource("2_p200p")
 surface_material_override/0 = SubResource("ShaderMaterial_ni31j")
 
-[node name="Decal" type="Decal" parent="." unique_id=1575702774]
+[node name="Shadow" type="Decal" parent="." unique_id=1575702774]
 size = Vector3(1, 1, 1)
 texture_albedo = ExtResource("5_pmsee")
 albedo_mix = 0.7

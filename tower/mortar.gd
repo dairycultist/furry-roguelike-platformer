@@ -1,6 +1,8 @@
 extends Tower;
 
-const mortar_projectile_prefab = preload("res://tower/mortar_projectile.tscn");
+@export var projectile_prefab : PackedScene;
+@export var time_of_flight : float = 1.0;
+@export var explosion_radius : float = 2.0;
 
 func _process(delta: float) -> void:
 	super._process(delta);
@@ -19,10 +21,13 @@ func pick_targets_to_attack(in_range : Array[Node3D]) -> Array[Node3D]:
 	$Head/Barrel/MuzzleFlash.scale = Vector3(1.5, 1.5, 2.5);
 	
 	# throw a projectile
-	var proj := mortar_projectile_prefab.instantiate();
+	var proj := projectile_prefab.instantiate();
 	
 	add_child(proj);
+	proj.enemy_path = enemy_path;
+	proj.explosion_radius = explosion_radius;
+	proj.explosion_damage = damage;
 	proj.global_position = $Head/Barrel/MuzzleFlash.global_position;
-	proj.initialize_velocity(1.0, in_range[0].global_position);
+	proj.initialize_velocity(time_of_flight, in_range[0].global_position);
 	
 	return [];
