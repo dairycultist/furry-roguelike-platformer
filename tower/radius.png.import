@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c64dvti0otlrp"
 path.s3tc="res://.godot/imported/radius.png-4fde8a90d03536bfe54e97890d74d9a8.s3tc.ctex"
+path.etc2="res://.godot/imported/radius.png-4fde8a90d03536bfe54e97890d74d9a8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://tower/radius.png"
-dest_files=["res://.godot/imported/radius.png-4fde8a90d03536bfe54e97890d74d9a8.s3tc.ctex"]
+dest_files=["res://.godot/imported/radius.png-4fde8a90d03536bfe54e97890d74d9a8.s3tc.ctex", "res://.godot/imported/radius.png-4fde8a90d03536bfe54e97890d74d9a8.etc2.ctex"]
 
 [params]
 
