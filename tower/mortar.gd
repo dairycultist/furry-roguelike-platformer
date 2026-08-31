@@ -23,6 +23,6 @@ func pick_targets_to_attack(in_range : Array[Node3D]) -> Array[Node3D]:
 	
 	add_child(proj);
 	proj.global_position = $Head/Barrel/MuzzleFlash.global_position;
-	proj.initialize_velocity(proj.global_position, in_range[0].global_position);
+	proj.initialize_velocity(1.0, in_range[0].global_position);
 	
 	return [];
