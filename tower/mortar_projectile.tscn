@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://3vl6d8q1ji5y"]
+
+[ext_resource type="Script" uid="uid://dxwqm6u2ouanb" path="res://tower/mortar_projectile.gd" id="1_7x6ix"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_lxpj2"]
+radius = 0.2
+height = 0.4
+
+[node name="MortarProjectile" type="Node3D" unique_id=189265295]
+script = ExtResource("1_7x6ix")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=945560455]
+mesh = SubResource("SphereMesh_lxpj2")

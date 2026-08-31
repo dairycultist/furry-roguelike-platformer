@@ -14,7 +14,7 @@ four base tower types
 - sniper (long range single target)
   - upgrades to railgun https://preview.redd.it/medium-should-get-a-railgun-for-season-4-if-it-is-sci-fi-or-v0-536ffi7cbhnd1.jpeg?width=1080&crop=smart&auto=webp&s=b446677aa0d562fd8fd48bb3dc74cc94916dffec
 - omnigun (short range AOE)
-  - upgrades to become either tesla tower (multiple hits per hit) or fire tower (applies burn effect)
+  - upgrades to become either tesla tower (multiple hits per hit), a fire tower (applies burn effect), or an ice tower (applies freeze effect)
 - mortar (long range AOE)
   - upgrades to get a gets a rocket
 

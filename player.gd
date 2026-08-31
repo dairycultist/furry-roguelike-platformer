@@ -38,7 +38,7 @@ func _ready() -> void:
 		tower_packed_scene_to_example[load("res://tower/mortar/mortar1.tscn")]
 	];
 	
-	money = 50;
+	money = 5000;
 
 func _process(delta: float) -> void:
 	
