@@ -13,10 +13,10 @@ func _ready() -> void:
 	$Mesh.set_surface_override_material(0, _material);
 
 func attack(dmg: int, from: Vector3) -> void:
-	from.y = global_position.y;
+	from.y = $Mesh.global_position.y;
 	_hit_fac = 0.0;
 	_health -= dmg;
-	$Mesh.global_position += 0.25 * (global_position - from).normalized();
+	$Mesh.global_position += 0.25 * ($Mesh.global_position - from).normalized();
 	if _health <= 0:
 		get_parent().alert_enemy_defeated(_money_value);
 		queue_free();
@@ -25,4 +25,4 @@ func _process(delta: float) -> void:
 	_material.set_shader_parameter("hit_fac", _hit_fac);
 	_hit_fac = min(1.0, _hit_fac + 2.0 * delta);
 	progress += _speed * delta;
-	$Mesh.position = lerp($Mesh.position, Vector3.ZERO, 3.0 * delta);
+	$Mesh.position = lerp($Mesh.position, Vector3(0.0, $Mesh.position.y, 0.0), 3.0 * delta);
