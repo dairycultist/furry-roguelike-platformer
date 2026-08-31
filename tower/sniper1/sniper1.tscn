@@ -25,6 +25,7 @@ script = ExtResource("1_4aon5")
 title = "Sniper"
 cost = 75
 sell_value = 35
+fire_cooldown_time = 2.0
 max_targeting_distance = 7
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]

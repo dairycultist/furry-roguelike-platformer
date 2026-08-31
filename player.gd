@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 				selected_tower.needs_examples = false;
 				
 				for packed_scene in selected_tower.upgrade_options:
-					if not tower_packed_scene_to_example[packed_scene]:
+					if not tower_packed_scene_to_example.has(packed_scene):
 						_create_example_for(packed_scene);
 					selected_tower.upgrade_options_examples.push_back(tower_packed_scene_to_example[packed_scene]);
 			

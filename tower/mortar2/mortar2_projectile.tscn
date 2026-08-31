@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ygx708e0cbxi"]
+
+[ext_resource type="Script" uid="uid://dxwqm6u2ouanb" path="res://tower/mortar_projectile.gd" id="1_lbbqx"]
+[ext_resource type="Texture2D" uid="uid://dfyjilw5snupr" path="res://enemy/shadow.png" id="2_gfjwj"]
+[ext_resource type="ArrayMesh" uid="uid://d4hxy83fxn20i" path="res://tower/mortar2/mortar2_rocket.obj" id="2_jpss3"]
+
+[node name="MortarProjectile" type="Node3D" unique_id=189265295]
+script = ExtResource("1_lbbqx")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=945560455]
+mesh = ExtResource("2_jpss3")
+
+[node name="Shadow" type="Decal" parent="." unique_id=2027011793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, 0)
+size = Vector3(1, 20, 1)
+texture_albedo = ExtResource("2_gfjwj")
+albedo_mix = 0.7
+upper_fade = 1.6502408e-05
+lower_fade = 1.0887505e-05
+cull_mask = 2

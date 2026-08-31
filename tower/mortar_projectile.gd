@@ -15,6 +15,9 @@ func initialize_velocity(time_of_flight: float, dest: Vector3):
 
 func _process(delta: float) -> void:
 	
+	$Mesh.look_at_from_position(Vector3.ZERO, _velocity, Vector3.UP, true);
+	$Mesh.position = Vector3.ZERO;
+	
 	global_position += _velocity * delta;
 	_velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta;
 	

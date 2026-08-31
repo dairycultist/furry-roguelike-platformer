@@ -11,6 +11,7 @@ var needs_examples : bool = true;
 var upgrade_options_examples : Array[Tower] = [];
 
 @export var damage : int = 1;
+@export var fire_cooldown_time : float = 1.0;
 @export var max_targeting_distance : int = 3;
 @export var long_range_only : bool = false;
 @export var override_targeting_animation : bool = false;
@@ -52,7 +53,7 @@ func _process(delta: float) -> void:
 		
 		# fire at target
 		if (fire_cooldown < 0.0):
-			fire_cooldown = 1.0;
+			fire_cooldown = fire_cooldown_time;
 			for enemy in pick_targets_to_attack(in_range):
 				enemy.attack(damage, global_position);
 	else:

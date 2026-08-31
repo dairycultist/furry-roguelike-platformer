@@ -25,6 +25,7 @@ script = ExtResource("1_jqjya")
 title = "Omnigun"
 cost = 150
 sell_value = 75
+fire_cooldown_time = 2.0
 override_targeting_animation = true
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]

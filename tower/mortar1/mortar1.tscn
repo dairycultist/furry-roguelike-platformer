@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://3vl6d8q1ji5y" path="res://tower/mortar1/mortar1_projectile.tscn" id="2_dgyqs"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="2_hy2ho"]
 [ext_resource type="ArrayMesh" uid="uid://38iu0jyphmiw" path="res://tower/mortar1/mortar1_head.obj" id="3_dgyqs"]
+[ext_resource type="PackedScene" uid="uid://cdfptg7g1g5k2" path="res://tower/mortar2/mortar2.tscn" id="3_kr66c"]
 [ext_resource type="ArrayMesh" uid="uid://dn4u3hpw5cey8" path="res://tower/mortar1/mortar1_barrel.obj" id="4_kr66c"]
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="5_1561t"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="6_2qq43"]
@@ -27,6 +28,8 @@ projectile_prefab = ExtResource("2_dgyqs")
 title = "Mortar"
 cost = 225
 sell_value = 100
+upgrade_options = Array[PackedScene]([ExtResource("3_kr66c")])
+fire_cooldown_time = 3.0
 max_targeting_distance = 7
 long_range_only = true
 
