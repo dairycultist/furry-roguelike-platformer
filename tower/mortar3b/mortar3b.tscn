@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://b812jkeiv40ga"]
+
+[ext_resource type="Script" uid="uid://3g608s2nuil" path="res://tower/mortar_twobarrel.gd" id="1_x4eay"]
+[ext_resource type="PackedScene" uid="uid://bgulcg6v434pm" path="res://tower/mortar3b/mortar3b_projectile.tscn" id="2_ldbfa"]
+[ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="3_a63ls"]
+[ext_resource type="ArrayMesh" uid="uid://ca2lgv02qdvgo" path="res://tower/mortar3b/mortar3b_head.obj" id="4_ldbfa"]
+[ext_resource type="ArrayMesh" uid="uid://cluhu35hql4cd" path="res://tower/mortar3b/mortar3b_barrel.obj" id="5_ldbfa"]
+[ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="6_p61g6"]
+[ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="7_5dkvj"]
+[ext_resource type="Texture2D" uid="uid://bjvgrdv7uu0gq" path="res://tower/muzzle_flash.png" id="8_e02h8"]
+[ext_resource type="Texture2D" uid="uid://4bsvmoct5kwv" path="res://tower/radius_longrange.png" id="9_cls5e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rfjx"]
+render_priority = 0
+shader = ExtResource("7_5dkvj")
+shader_parameter/albedo = ExtResource("8_e02h8")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/hit_fac = 1.0
+shader_parameter/origin_fade_dist = 12.0
+shader_parameter/origin_fade_width2 = 1.0
+shader_parameter/fade_corner_radius = 0.2
+shader_parameter/exponent = 10.0
+
+[node name="Mortar" type="Node3D" unique_id=1625817297]
+script = ExtResource("1_x4eay")
+projectile_prefab = ExtResource("2_ldbfa")
+time_of_flight = 0.6
+explosion_radius = 3.0
+title = "Heavy"
+cost = 500
+sell_value = 300
+damage = 12
+fire_cooldown_time = 2.0
+max_targeting_distance = 7
+long_range_only = true
+
+[node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
+mesh = ExtResource("3_a63ls")
+
+[node name="Head" type="MeshInstance3D" parent="." unique_id=823903376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = ExtResource("4_ldbfa")
+
+[node name="Barrel1" type="MeshInstance3D" parent="Head" unique_id=569734477]
+transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.3420201, 0, -0.3420201, 0.93969256, -0.4451328, 0.46727437, -0.12850934)
+mesh = ExtResource("5_ldbfa")
+
+[node name="MuzzleFlash" type="MeshInstance3D" parent="Head/Barrel1" unique_id=2026340139]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.4901161e-08, 0.48651195)
+mesh = ExtResource("6_p61g6")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Barrel2" type="MeshInstance3D" parent="Head" unique_id=249340330]
+transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.3420201, 0, -0.3420201, 0.93969256, 0.445, 0.467, -0.129)
+mesh = ExtResource("5_ldbfa")
+
+[node name="MuzzleFlash" type="MeshInstance3D" parent="Head/Barrel2" unique_id=318472320]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.4901161e-08, 0.48651195)
+mesh = ExtResource("6_p61g6")
+surface_material_override/0 = SubResource("ShaderMaterial_4rfjx")
+
+[node name="Radius" type="Decal" parent="." unique_id=467498380]
+size = Vector3(3, 2, 3)
+texture_albedo = ExtResource("9_cls5e")
+albedo_mix = 0.3
+upper_fade = 1e-05
+lower_fade = 1e-05
+cull_mask = 2

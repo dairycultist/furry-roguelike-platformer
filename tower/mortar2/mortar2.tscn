@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://ddusf3nsbsd74" path="res://tower/mortar.gd" id="1_hlwwi"]
 [ext_resource type="PackedScene" uid="uid://ygx708e0cbxi" path="res://tower/mortar2/mortar2_projectile.tscn" id="2_6p0na"]
 [ext_resource type="ArrayMesh" uid="uid://crx1badckkgiw" path="res://tower/tower_base.obj" id="3_1ev42"]
+[ext_resource type="PackedScene" uid="uid://641318kqq4a0" path="res://tower/mortar3a/mortar3a.tscn" id="3_qcgyu"]
 [ext_resource type="ArrayMesh" uid="uid://dyyigx4ib3xqs" path="res://tower/mortar2/mortar2_head.obj" id="4_6p0na"]
+[ext_resource type="PackedScene" uid="uid://b812jkeiv40ga" path="res://tower/mortar3b/mortar3b.tscn" id="4_tlie2"]
 [ext_resource type="ArrayMesh" uid="uid://d4hxy83fxn20i" path="res://tower/mortar2/mortar2_rocket.obj" id="5_6p0na"]
 [ext_resource type="ArrayMesh" uid="uid://brqw8q3xlx0oi" path="res://tower/muzzle_flash.obj" id="6_hn8mq"]
 [ext_resource type="Shader" uid="uid://bl2sqbvsmbi5q" path="res://toon.gdshader" id="7_8x8mc"]
@@ -29,10 +31,12 @@ explosion_radius = 3.5
 title = "Rocket"
 cost = 350
 sell_value = 125
+upgrade_options = Array[PackedScene]([ExtResource("3_qcgyu"), ExtResource("4_tlie2")])
 damage = 3
 fire_cooldown_time = 2.5
 max_targeting_distance = 7
 long_range_only = true
+override_targeting_animation = true
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=798336857]
 mesh = ExtResource("3_1ev42")
